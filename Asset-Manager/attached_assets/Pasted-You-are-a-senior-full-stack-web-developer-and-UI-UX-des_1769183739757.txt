@@ -1,0 +1,193 @@
+You are a senior full-stack web developer and UI/UX designer.
+
+Create a fully responsive, mobile-first cultural fest website named 
+“RHYTHMS 2026” for A.C. Patil College of Engineering.
+
+📍 Event Details:
+- Fest Name: RHYTHMS 2026
+- College: A.C. Patil College of Engineering
+- Dates: 5th & 6th March 2026
+- Theme: MYSTERY (dark, immersive, cinematic, intriguing)
+
+━━━━━━━━━━━━━━━━━━━━
+🎨 DESIGN & THEME
+━━━━━━━━━━━━━━━━━━━━
+- Dark mystery theme using black, deep purple, midnight blue, neon accents
+- Subtle smoke, blur, glow, and gradient effects
+- Animated intro splash screen with RHYTHMS 2026 logo/title
+- Smooth loading animation (free libraries only)
+- Mystery-style typography (clean + cinematic)
+- Hover effects, parallax scroll, fade-in animations
+- Fully mobile-friendly (priority: phones)
+
+━━━━━━━━━━━━━━━━━━━━
+🧭 NAVBAR SECTIONS
+━━━━━━━━━━━━━━━━━━━━
+- Home
+- About Us
+- Events
+- Tickets
+- Sponsors
+- Contact
+- Login
+- Register
+
+Sticky navbar with smooth scrolling.
+
+━━━━━━━━━━━━━━━━━━━━
+🏠 HOME PAGE
+━━━━━━━━━━━━━━━━━━━━
+- Hero section with animated background
+- Tagline related to mystery (e.g. “Unveil the Rhythm”)
+- Event dates & college name
+- CTA buttons: Register Now | View Events
+- Countdown timer to 5 March 2026
+
+━━━━━━━━━━━━━━━━━━━━
+📖 ABOUT US
+━━━━━━━━━━━━━━━━━━━━
+Include:
+- Introduction to RHYTHMS 2026
+- College cultural fest description
+- Theme explanation: “Mystery”
+- Dress Code Days:
+  - Bollywood Day
+  - Western Day
+  - Mismatch Day
+  - Traditional Day
+- Mention dates clearly for each day
+- Animated section reveals
+
+━━━━━━━━━━━━━━━━━━━━
+🎭 EVENTS PAGE
+━━━━━━━━━━━━━━━━━━━━
+Create event cards with:
+- Event Name
+- Category
+- Entry Fee
+- Prizes
+- Register Button (opens event registration form)
+
+EVENT DATA:
+
+ON-STAGE EVENTS
+Dance:
+- Solo (₹100 | 1st ₹1000 | 2nd ₹800)
+- Duet (₹150 | 1st ₹1000 | 2nd ₹800)
+- Group (₹500 | 1st ₹3000 | 2nd ₹2000)
+
+Singing:
+- Solo (₹100 | 1st ₹1000 | 2nd ₹800)
+- Duet (₹150 | 1st ₹1000 | 2nd ₹800)
+
+Fashion Show:
+- Entry Fee ₹1500
+- 1st Prize ₹7000
+- 2nd Prize ₹4000
+
+ON-GROUND EVENTS
+- Antakshari (₹250 | 1st ₹1500 | 2nd ₹1000)
+- Flashmob (Fee: Not specified)
+
+IN SEMINAR HALL
+Dramatics:
+- Skit (₹500 | 1st ₹1000 | 2nd ₹800)
+- Mono Act (₹50 | 1st ₹500 | 2nd ₹250)
+
+Swarsandhya (details TBA)
+
+LITERARY ARTS
+- Story Telling (₹50 | 1st ₹500 | 2nd ₹250)
+- Poem Recitation / Shayari (₹50 | 1st ₹500 | 2nd ₹250)
+- Stand-Up Comedy (₹100 | 1st ₹1000 | 2nd ₹500)
+
+FINE ARTS
+- Sketching / Doodling (₹50 | 1st ₹500 | 2nd ₹250)
+- Mandala Art (₹50 | 1st ₹500 | 2nd ₹250)
+- Rangoli (₹50 | 1st ₹500 | 2nd ₹250)
+
+MISCELLANEOUS
+- Treasure Hunt (₹150 | 1st ₹1000 | 2nd ₹800)
+- Rose Day (₹50)
+- Rellography (₹50 | 1st ₹500 | 2nd ₹250)
+- Attire Spectra (₹200 | 1st ₹1000 | 2nd ₹800)
+
+━━━━━━━━━━━━━━━━━━━━
+📝 REGISTRATION SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+User Registration Form:
+- PRN Number
+- Date of Birth (DDMMYYYY)
+- College Name
+- Branch
+
+Validation:
+- DOB format strictly DDMMYYYY
+- PRN mandatory
+
+━━━━━━━━━━━━━━━━━━━━
+🔐 LOGIN SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+Login Fields:
+- PRN Number
+- Password = DOB (DDMMYYYY)
+
+Basic authentication logic (frontend + backend mock if needed).
+
+━━━━━━━━━━━━━━━━━━━━
+🎟️ EVENT REGISTRATION & TICKETS
+━━━━━━━━━━━━━━━━━━━━
+- Logged-in users can register for events
+- After successful registration:
+  - Generate a digital ticket
+  - Ticket contains:
+    - Name / PRN
+    - Event Name
+    - Date
+    - QR Code or Unique ID
+- Ticket should be downloadable (PDF or image)
+
+━━━━━━━━━━━━━━━━━━━━
+📞 CONTACT PAGE
+━━━━━━━━━━━━━━━━━━━━
+Sections for:
+- Cultural Secretary
+- Co-Cultural Secretary
+- General Secretary
+Each with:
+- Name
+- Phone number
+- Email
+- Role
+
+Add contact form with email trigger (mock acceptable).
+
+━━━━━━━━━━━━━━━━━━━━
+🤝 SPONSORS PAGE
+━━━━━━━━━━━━━━━━━━━━
+- Sponsor logo grid
+- Animated reveal
+- Placeholder sponsor slots
+- “Become a Sponsor” CTA
+
+━━━━━━━━━━━━━━━━━━━━
+⚙️ TECH REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━
+- Use HTML, CSS, JavaScript
+- Optional: React + Tailwind
+- Backend: Node.js / Express (basic)
+- Use only FREE libraries & assets
+- Clean folder structure
+- Commented code
+- Optimized for deployment
+
+━━━━━━━━━━━━━━━━━━━━
+✨ EXTRA
+━━━━━━━━━━━━━━━━━━━━
+- Loading screen animation
+- Smooth page transitions
+- Mobile-first layouts
+- SEO friendly structure
+- Accessible color contrast
+
+Deliver a production-ready cultural fest website.
