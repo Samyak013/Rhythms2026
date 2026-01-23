@@ -5,40 +5,40 @@
 @tailwind utilities;
 
 :root {
-  /* Dark Mystery Theme Palette */
+  /* Dark Mystery Theme Palette - Refined */
   --font-display: 'Cinzel', serif;
   --font-body: 'Montserrat', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  /* Deep shadows and mysterious blacks */
+  /* Deep shadows and mysterious blacks - more depth */
   --background: 240 10% 2%;    /* Deepest obsidian */
   --foreground: 0 0% 90%;
   
-  /* Deep Blood Red / Crimson for a dramatic feel */
-  --primary: 0 84% 45%; 
+  /* Desaturated Crimson for a more mature/mysterious feel */
+  --primary: 0 70% 35%; 
   --primary-foreground: 0 0% 100%;
 
-  /* Antique Gold for secondary accents */
-  --secondary: 45 60% 50%;
+  /* Cold Silver for secondary accents instead of gold */
+  --secondary: 210 10% 60%;
   --secondary-foreground: 240 10% 2%;
 
   /* Muted tones - Cold Grays */
-  --muted: 240 5% 10%;
-  --muted-foreground: 240 5% 60%;
+  --muted: 240 5% 8%;
+  --muted-foreground: 240 5% 50%;
 
-  /* Cards - Dark leather/stone feel */
-  --card: 240 5% 5%;
+  /* Cards - Translucent obsidian */
+  --card: 240 10% 3%;
   --card-foreground: 0 0% 90%;
 
-  /* Borders - Subtle and sharp */
-  --border: 240 5% 15%;
-  --input: 240 5% 15%;
+  /* Borders - Sharp and dark */
+  --border: 240 10% 10%;
+  --input: 240 10% 10%;
   
   --destructive: 0 62% 30%;
   --destructive-foreground: 210 40% 98%;
 
-  --ring: 0 84% 45%;
-  --radius: 0.2rem; /* Sharper corners for a more serious/mysterious look */
+  --ring: 0 70% 35%;
+  --radius: 0px; /* Sharp edges for mystery */
 }
 
 @layer base {
@@ -48,33 +48,30 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground;
     font-family: var(--font-body);
-    background-image: 
-      radial-gradient(circle at 50% 0%, hsla(0, 50%, 10%, 0.4) 0%, transparent 60%),
-      radial-gradient(circle at 10% 90%, hsla(45, 30%, 5%, 0.3) 0%, transparent 40%);
+    background: radial-gradient(circle at 50% -20%, hsla(0, 100%, 15%, 0.15), transparent 50%),
+                radial-gradient(circle at 0% 100%, hsla(240, 100%, 10%, 0.1), transparent 40%),
+                #050505;
     background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    @apply font-bold tracking-[0.1em] uppercase;
+    @apply font-bold tracking-[0.2em] uppercase;
   }
 }
 
 @layer utilities {
   .text-shadow-mystery {
-    text-shadow: 0 0 15px hsla(0, 84%, 45%, 0.6), 0 0 30px hsla(0, 84%, 45%, 0.3);
+    text-shadow: 0 0 10px hsla(0, 70%, 35%, 0.4), 0 0 20px hsla(0, 70%, 35%, 0.2);
   }
   
-  .text-shadow-gold {
-    text-shadow: 0 0 10px hsla(45, 60%, 50%, 0.5);
+  .mystery-border {
+    @apply border border-white/5 bg-white/5 backdrop-blur-2xl;
   }
 
-  .fog-effect {
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  }
-
-  .mystery-card {
-    @apply bg-black/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-500 hover:border-primary/50;
+  .smoke-overlay {
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+    pointer-events: none;
   }
 }
 
