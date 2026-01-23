@@ -26,11 +26,11 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="flex flex-col items-center leading-none">
-              <span className="text-[10px] tracking-[0.6em] text-muted-foreground font-mono uppercase mb-0.5 ml-1">
+              <span className="text-[10px] tracking-[0.6em] text-primary/60 font-mono uppercase mb-0.5 ml-1">
                 ACPCE
               </span>
               <span className="font-display text-2xl font-bold tracking-[0.2em] text-foreground group-hover:text-primary transition-all duration-700 uppercase">
-                RHYTHMS<span className="text-primary text-shadow-mystery">2026</span>
+                RHYTHMS<span className="text-primary text-shadow-victorian">2026</span>
               </span>
             </div>
           </Link>
