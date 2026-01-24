@@ -21,62 +21,63 @@ export function EventCard({ event, isRegistered, onRegister, isRegistering }: Ev
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="bg-card/50 backdrop-blur-sm border-white/10 overflow-hidden hover:border-primary/50 hover:shadow-[0_0_20px_-5px_var(--primary)] transition-all duration-300 h-full flex flex-col group">
-        <div className="h-2 bg-gradient-to-r from-primary to-secondary w-full" />
+      <Card className="bg-[#0e0c0a]/60 backdrop-blur-md border-primary/10 rounded-none overflow-hidden hover:border-primary/40 hover:shadow-[0_0_30px_-10px_var(--primary)] transition-all duration-700 h-full flex flex-col group relative">
+        <div className="absolute top-0 right-0 w-16 h-16 border-r border-t border-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="absolute bottom-0 left-0 w-16 h-16 border-l border-b border-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-3 pt-8">
           <div className="flex justify-between items-start gap-4">
             <div>
-              <Badge variant="outline" className="mb-2 text-xs border-primary/40 text-primary bg-primary/10">
+              <Badge variant="outline" className="mb-3 text-[10px] tracking-widest border-primary/30 text-primary bg-primary/5 rounded-none uppercase">
                 {event.category}
               </Badge>
-              <h3 className="text-xl font-bold font-display text-foreground group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-bold font-display text-[#d4c5a9] group-hover:text-primary transition-colors tracking-wider">
                 {event.name}
               </h3>
             </div>
             <div className="text-right">
-              <span className="block text-2xl font-bold text-secondary">₹{event.entryFee}</span>
+              <span className="block text-2xl font-bold text-primary opacity-80">₹{event.entryFee}</span>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent className="flex-grow space-y-4">
-          <p className="text-muted-foreground text-sm line-clamp-3">
+        <CardContent className="flex-grow space-y-6 pt-2">
+          <p className="text-[#a89984] text-sm line-clamp-3 leading-relaxed italic opacity-70">
             {event.description}
           </p>
           
-          <div className="grid grid-cols-2 gap-3 text-xs text-muted-foreground mt-4">
+          <div className="grid grid-cols-2 gap-4 text-[10px] text-[#a89984] mt-4 font-mono uppercase tracking-widest">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-primary" />
+              <Calendar className="w-3.5 h-3.5 text-primary/60" />
               <span>{event.date}</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-primary" />
+              <MapPin className="w-3.5 h-3.5 text-primary/60" />
               <span>{event.venue || "TBA"}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-primary" />
+              <Users className="w-3.5 h-3.5 text-primary/60" />
               <span>{event.teamSize}</span>
             </div>
             {event.prizeFirst && (
               <div className="flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-secondary" />
-                <span className="text-secondary font-medium">1st: ₹{event.prizeFirst}</span>
+                <Trophy className="w-3.5 h-3.5 text-primary" />
+                <span className="text-primary font-bold">₹{event.prizeFirst}</span>
               </div>
             )}
           </div>
         </CardContent>
 
-        <CardFooter className="pt-4 border-t border-white/5">
+        <CardFooter className="pt-6 pb-8 border-t border-primary/5">
           <Button 
-            className={`w-full ${isRegistered 
-              ? "bg-green-500/10 text-green-500 hover:bg-green-500/20 border border-green-500/50" 
-              : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_10px_-2px_var(--primary)]"}`}
+            className={`w-full rounded-none tracking-[0.2em] uppercase text-xs h-12 transition-all duration-500 ${isRegistered 
+              ? "bg-primary/10 text-primary border border-primary/30" 
+              : "bg-primary text-primary-foreground hover:bg-primary/80 shadow-lg"}`}
             disabled={isRegistered || isRegistering}
             onClick={() => onRegister(event.id)}
             variant={isRegistered ? "outline" : "default"}
           >
-            {isRegistered ? "Registered" : isRegistering ? "Registering..." : "Register Now"}
+            {isRegistered ? "Solved" : isRegistering ? "Registering..." : "Examine Case"}
           </Button>
         </CardFooter>
       </Card>

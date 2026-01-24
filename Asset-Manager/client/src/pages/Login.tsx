@@ -49,11 +49,14 @@ export default function Login() {
         className="w-full max-w-md relative z-10"
       >
         <Card className="bg-black/60 backdrop-blur-xl border-white/10 shadow-2xl">
-          <CardHeader className="text-center pb-2">
-            <h1 className="text-3xl font-display font-bold text-white mb-1">Welcome Back</h1>
-            <p className="text-sm text-muted-foreground">Sign in to access your dashboard</p>
+          <CardHeader className="text-center pb-2 pt-8">
+            <span className="text-[10px] tracking-[0.8em] text-primary font-mono uppercase mb-4 block opacity-60">
+              The Agency
+            </span>
+            <h1 className="text-3xl font-display font-bold text-[#d4c5a9] tracking-widest uppercase mb-2">Identify Yourself</h1>
+            <p className="text-[#a89984] text-sm italic opacity-60">"It is a capital mistake to theorize before one has data."</p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pb-10">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -61,11 +64,15 @@ export default function Login() {
                   name="prn"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>PRN / Roll Number</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">ID / PRN</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter your college PRN" className="bg-white/5 border-white/10 text-white" {...field} />
+                        <Input 
+                          placeholder="Lead ID..." 
+                          className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12" 
+                          {...field} 
+                        />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px] uppercase" />
                     </FormItem>
                   )}
                 />
@@ -75,29 +82,36 @@ export default function Login() {
                   name="dob"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date of Birth (Password)</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">Access Code (DOB)</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="DDMMYYYY" className="bg-white/5 border-white/10 text-white" {...field} />
+                        <Input 
+                          type="password" 
+                          placeholder="DDMMYYYY" 
+                          className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12" 
+                          {...field} 
+                        />
                       </FormControl>
-                      <p className="text-xs text-muted-foreground">Format: DDMMYYYY (e.g., 05032002)</p>
-                      <FormMessage />
+                      <p className="text-[10px] text-[#a89984]/40 font-mono uppercase tracking-widest mt-2">Format: DDMMYYYY</p>
+                      <FormMessage className="text-[10px] uppercase" />
                     </FormItem>
                   )}
                 />
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 h-12 text-base font-semibold shadow-[0_0_15px_-5px_var(--primary)]"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/80 rounded-none h-12 uppercase tracking-[0.3em] text-xs shadow-lg transition-all duration-500"
                   disabled={isLoggingIn}
                 >
-                  {isLoggingIn ? "Authenticating..." : "Login"}
+                  {isLoggingIn ? "Verifying..." : "Authorize Access"}
                 </Button>
 
-                <div className="text-center mt-4 text-sm text-muted-foreground">
-                  Don't have an account?{" "}
-                  <Link href="/register" className="text-primary hover:underline font-medium">
-                    Register Here
-                  </Link>
+                <div className="text-center mt-6">
+                  <p className="text-[#a89984] text-[10px] uppercase tracking-[0.2em] opacity-60">
+                    Not in the agency?{" "}
+                    <Link href="/register" className="text-primary hover:underline underline-offset-4 font-bold">
+                      Enrol Now
+                    </Link>
+                  </p>
                 </div>
               </form>
             </Form>

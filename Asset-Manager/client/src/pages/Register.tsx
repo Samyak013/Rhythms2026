@@ -87,12 +87,15 @@ export default function Register() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="w-full max-w-lg relative z-10"
       >
-        <Card className="bg-black/60 backdrop-blur-xl border-white/10 shadow-2xl">
-          <CardHeader className="text-center pb-2">
-            <h1 className="text-3xl font-display font-bold text-white mb-1 tracking-widest">JOIN THE RHYTHM</h1>
-            <p className="text-sm text-muted-foreground font-mono italic">Create your mysterious identity</p>
+        <Card className="bg-[#0e0c0a]/60 backdrop-blur-xl border-primary/10 rounded-none shadow-2xl">
+          <CardHeader className="text-center pb-2 pt-8">
+            <span className="text-[10px] tracking-[0.8em] text-primary font-mono uppercase mb-4 block opacity-60">
+              The Agency
+            </span>
+            <h1 className="text-3xl font-display font-bold text-[#d4c5a9] tracking-widest uppercase mb-2">New Enrolment</h1>
+            <p className="text-[#a89984] text-sm italic opacity-60">"The little things are infinitely the most important."</p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pb-10">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -100,11 +103,11 @@ export default function Register() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs uppercase tracking-tighter">Full Name</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter your full name" className="bg-white/5 border-white/10 text-white focus:border-primary/50 transition-all" {...field} />
+                        <Input placeholder="Enter identity..." className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px] uppercase" />
                     </FormItem>
                   )}
                 />
@@ -115,11 +118,11 @@ export default function Register() {
                     name="prn"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xs uppercase tracking-tighter">PRN / Roll No</FormLabel>
+                        <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">ID / PRN</FormLabel>
                         <FormControl>
-                          <Input placeholder="12345678" className="bg-white/5 border-white/10 text-white focus:border-primary/50 transition-all" {...field} />
+                          <Input placeholder="Lead ID..." className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px] uppercase" />
                       </FormItem>
                     )}
                   />
@@ -129,11 +132,11 @@ export default function Register() {
                     name="dob"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xs uppercase tracking-tighter">DOB (Password)</FormLabel>
+                        <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">Access Code (DOB)</FormLabel>
                         <FormControl>
-                          <Input placeholder="DDMMYYYY" className="bg-white/5 border-white/10 text-white focus:border-primary/50 transition-all" {...field} />
+                          <Input placeholder="DDMMYYYY" className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px] uppercase" />
                       </FormItem>
                     )}
                   />
@@ -144,22 +147,22 @@ export default function Register() {
                   name="college"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs uppercase tracking-tighter">College Name</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">Base of Operations</FormLabel>
                       <FormControl>
                         <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-primary/50 transition-all">
+                          <SelectTrigger className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12">
                             <SelectValue placeholder="Select Mumbai College" />
                           </SelectTrigger>
-                          <SelectContent className="bg-neutral-900 border-white/10">
+                          <SelectContent className="bg-[#0e0c0a] border-primary/20 rounded-none">
                             {MUMBAI_COLLEGES.map((college) => (
-                              <SelectItem key={college} value={college} className="text-white hover:bg-white/10">
+                              <SelectItem key={college} value={college} className="text-[#a89984] focus:bg-primary/10 focus:text-primary">
                                 {college}
                               </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px] uppercase" />
                     </FormItem>
                   )}
                 />
@@ -169,39 +172,41 @@ export default function Register() {
                   name="branch"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs uppercase tracking-tighter">Branch</FormLabel>
+                      <FormLabel className="text-[10px] uppercase tracking-widest text-[#d4c5a9]">Specialization</FormLabel>
                       <FormControl>
                         <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-primary/50 transition-all">
+                          <SelectTrigger className="bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none h-12">
                             <SelectValue placeholder="Select Branch" />
                           </SelectTrigger>
-                          <SelectContent className="bg-neutral-900 border-white/10">
+                          <SelectContent className="bg-[#0e0c0a] border-primary/20 rounded-none">
                             {BRANCHES.map((branch) => (
-                              <SelectItem key={branch} value={branch} className="text-white hover:bg-white/10">
+                              <SelectItem key={branch} value={branch} className="text-[#a89984] focus:bg-primary/10 focus:text-primary">
                                 {branch}
                               </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px] uppercase" />
                     </FormItem>
                   )}
                 />
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 mt-4 text-base font-bold tracking-widest shadow-[0_0_20px_-5px_var(--primary)] transition-all active:scale-95"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/80 h-12 mt-4 uppercase tracking-[0.3em] text-xs rounded-none shadow-lg transition-all duration-500"
                   disabled={isRegistering}
                 >
-                  {isRegistering ? "UNVEILING..." : "CREATE IDENTITY"}
+                  {isRegistering ? "Unveiling Identity..." : "Seal File"}
                 </Button>
 
-                <div className="text-center mt-4 text-xs text-muted-foreground uppercase tracking-widest">
-                  Already part of the rhythm?{" "}
-                  <Link href="/login" className="text-primary hover:underline font-bold">
-                    Login
-                  </Link>
+                <div className="text-center mt-6">
+                  <p className="text-[#a89984] text-[10px] uppercase tracking-[0.2em] opacity-60">
+                    Already part of the agency?{" "}
+                    <Link href="/login" className="text-primary hover:underline underline-offset-4 font-bold">
+                      Login
+                    </Link>
+                  </p>
                 </div>
               </form>
             </Form>

@@ -45,21 +45,21 @@ export default function Events() {
   return (
     <div className="min-h-screen pt-24 pb-12 px-4 max-w-7xl mx-auto">
       <div className="mb-12 text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-display font-bold text-white">
-          Event <span className="text-primary">Lineup</span>
+        <h1 className="text-4xl md:text-5xl font-display font-bold text-[#d4c5a9]">
+          The <span className="text-primary">Evidence</span>
         </h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          From the spotlight of the stage to the strokes of a brush. Choose your arena.
+        <p className="text-[#a89984] max-w-2xl mx-auto italic">
+          "The world is full of obvious things which nobody by any chance ever observes." - Choose your lead.
         </p>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8 sticky top-24 z-30 bg-background/80 backdrop-blur-md p-4 rounded-xl border border-white/5">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8 sticky top-24 z-30 bg-[#0e0c0a]/90 backdrop-blur-xl p-6 border border-primary/10">
         <div className="relative w-full md:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/60" />
           <Input 
-            placeholder="Search events..." 
-            className="pl-10 bg-card border-white/10 focus:border-primary/50"
+            placeholder="Search leads..." 
+            className="pl-10 bg-[#0a0806] border-primary/20 focus:border-primary text-[#d4c5a9] rounded-none"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -72,7 +72,11 @@ export default function Events() {
               variant={selectedCategory === cat ? "default" : "outline"}
               onClick={() => setSelectedCategory(cat)}
               size="sm"
-              className={selectedCategory === cat ? "bg-primary text-primary-foreground" : "border-white/10 text-muted-foreground hover:text-white"}
+              className={`rounded-none tracking-widest uppercase text-[10px] ${
+                selectedCategory === cat 
+                ? "bg-primary text-primary-foreground" 
+                : "border-primary/20 text-[#a89984] hover:border-primary/40 hover:bg-primary/5"
+              }`}
             >
               {cat}
             </Button>
