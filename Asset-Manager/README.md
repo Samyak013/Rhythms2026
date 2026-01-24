@@ -135,19 +135,32 @@ The fest is scheduled for **March 5th & 6th, 2026**
 
 ## Deployment
 
-### Netlify
+### Quick Deploy (Netlify + Railway)
 
-1. Build the project: `npm run build`
-2. Set environment variable `DATABASE_URL` in Netlify settings
-3. Deploy the `dist` folder
+1. **Frontend:** Deploy to Netlify (automatic from GitHub)
+2. **Backend:** Deploy to Railway with PostgreSQL
+3. Set `VITE_API_URL` environment variable in Netlify
 
-### Hostinger / Traditional Hosting
+**See [NETLIFY_DEPLOY.md](./NETLIFY_DEPLOY.md) for detailed steps**
 
-1. Build: `npm run build`
-2. Set up Node.js environment
-3. Configure PostgreSQL database
-4. Set `DATABASE_URL` environment variable
-5. Deploy and run: `npm start`
+### Hosting Options
+
+**Netlify (Frontend only)**
+- Easiest to set up
+- Free tier available
+- Static site hosting
+- See `netlify.toml` for configuration
+
+**Railway (Backend + Database)**
+- Runs Node.js server
+- Includes PostgreSQL database
+- Free tier available
+- Perfect for this stack
+
+**Hostinger (Both Frontend & Backend)**
+- Traditional hosting
+- Full control
+- May require more setup
 
 ## API Endpoints
 

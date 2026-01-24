@@ -1,11 +1,20 @@
 [build]
 command = "npm run build"
 publish = "dist/public"
+functions = "netlify/functions"
 
 [build.environment]
 NODE_VERSION = "18.17.0"
 NODE_ENV = "production"
 
+# Rewrite API calls to backend (configure VITE_API_URL in production)
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/api"
+status = 200
+force = false
+
+# SPA routing - serve index.html for all non-file routes
 [[redirects]]
 from = "/*"
 to = "/index.html"
@@ -18,9 +27,14 @@ X-Content-Type-Options = "nosniff"
 X-Frame-Options = "DENY"
 X-XSS-Protection = "1; mode=block"
 Referrer-Policy = "strict-origin-when-cross-origin"
-Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+Cache-Control = "public, max-age=3600"
 
 [[headers]]
-for = "/api/*"
+for = "/assets/*"
 [headers.values]
-Cache-Control = "no-cache, no-store, must-revalidate"
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.html"
+[headers.values]
+Cache-Control = "public, max-age=0, must-revalidate"
