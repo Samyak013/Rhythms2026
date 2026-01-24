@@ -20,11 +20,6 @@ export default function Login() {
   const { login, isLoggingIn, user } = useAuth();
   const [_, setLocation] = useLocation();
 
-  if (user) {
-    setLocation("/");
-    return null;
-  }
-
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -32,6 +27,11 @@ export default function Login() {
       dob: "",
     },
   });
+
+  if (user) {
+    setLocation("/");
+    return null;
+  }
 
   const onSubmit = (data: LoginForm) => {
     login(data);

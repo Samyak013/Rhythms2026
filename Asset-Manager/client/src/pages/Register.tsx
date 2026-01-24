@@ -50,11 +50,6 @@ export default function Register() {
   const { register, isRegistering, user } = useAuth();
   const [_, setLocation] = useLocation();
 
-  if (user) {
-    setLocation("/");
-    return null;
-  }
-
   const form = useForm<InsertUser>({
     resolver: zodResolver(insertUserSchema),
     defaultValues: {
@@ -65,6 +60,11 @@ export default function Register() {
       branch: "",
     },
   });
+
+  if (user) {
+    setLocation("/");
+    return null;
+  }
 
   const onSubmit = (data: InsertUser) => {
     register(data, {

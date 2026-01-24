@@ -36,7 +36,7 @@ export default function Events() {
 
   const handleRegister = (eventId: number) => {
     if (!user) {
-      window.location.href = "/login";
+      setLocation("/login");
       return;
     }
     register({ eventId, userId: user.id });
