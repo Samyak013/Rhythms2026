@@ -1,18 +1,10 @@
 [build]
 command = "npm run build"
 publish = "dist/public"
-functions = "netlify/functions"
 
 [build.environment]
 NODE_VERSION = "18.17.0"
 NODE_ENV = "production"
-
-# Rewrite API calls to backend (configure VITE_API_URL in production)
-[[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/api"
-status = 200
-force = false
 
 # SPA routing - serve index.html for all non-file routes
 [[redirects]]
