@@ -20,17 +20,17 @@ export function Navbar() {
   const isActive = (path: string) => location === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-white/5 w-full">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
             <div className="flex flex-col items-center leading-none">
-              <span className="text-[10px] tracking-[0.6em] text-primary/60 font-mono uppercase mb-0.5 ml-1">
+              <span className="text-[8px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-primary/60 font-mono uppercase mb-0.5 ml-0.5 sm:ml-1">
                 ACPCE
               </span>
-              <span className="font-display text-2xl font-bold tracking-[0.2em] text-foreground group-hover:text-primary transition-all duration-700 uppercase">
-                RHYTHMS<span className="text-primary text-shadow-victorian">2026</span>
+              <span className="font-display text-xl sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.2em] text-foreground group-hover:text-primary transition-all duration-700 uppercase">
+                RHYTHMS<span className="text-primary text-shadow-victorian text-lg sm:text-2xl">2026</span>
               </span>
             </div>
           </Link>
@@ -41,7 +41,7 @@ export function Navbar() {
               <Link 
                 key={link.href} 
                 href={link.href}
-                className={`relative font-medium text-sm tracking-wide transition-colors duration-200 hover:text-primary ${
+                className={`relative font-medium text-xs sm:text-sm tracking-wide transition-colors duration-200 hover:text-primary ${
                   isActive(link.href) ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -57,31 +57,31 @@ export function Navbar() {
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 sm:gap-4">
             {user ? (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-4">
                 <Link href="/tickets">
-                  <Button variant="outline" size="sm" className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary">
-                    <Ticket className="w-4 h-4" />
-                    My Tickets
+                  <Button variant="outline" size="sm" className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary text-xs sm:text-sm">
+                    <Ticket className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <span className="hidden sm:inline">My Tickets</span>
                   </Button>
                 </Link>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <UserIcon className="w-4 h-4" />
-                  <span className="font-mono text-xs">{user.prn}</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
+                  <UserIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="font-mono text-[10px] sm:text-xs hidden sm:inline">{user.prn}</span>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="icon" 
                   onClick={() => logout()}
-                  className="text-muted-foreground hover:text-destructive transition-colors"
+                  className="text-muted-foreground hover:text-destructive transition-colors h-8 w-8 sm:h-10 sm:w-10"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
               </div>
             ) : (
               <Link href="/login">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_15px_-3px_var(--primary)] transition-all hover:scale-105">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_15px_-3px_var(--primary)] transition-all hover:scale-105 text-xs sm:text-sm py-1.5 sm:py-2">
                   Login / Register
                 </Button>
               </Link>

@@ -94,6 +94,28 @@
     from, to { border-color: transparent }
     50% { border-color: orange; }
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    body {
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    input, textarea, select, button {
+      font-size: 16px !important;
+    }
+  }
 }
 
 /* Custom Scrollbar */
