@@ -1,15 +1,22 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, type Registration } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
+import { mockEvents } from "@/lib/mock-events";
 
 // === GET ALL EVENTS ===
 export function useEvents() {
   return useQuery({
     queryKey: [api.events.list.path],
     queryFn: async () => {
-      const res = await fetch(api.events.list.path);
-      if (!res.ok) throw new Error("Failed to fetch events");
-      return api.events.list.responses[200].parse(await res.json());
+      try {
+        const res = await fetch(api.events.list.path);
+        if (!res.ok) throw new Error("Failed to fetch events");
+        return api.events.list.responses[200].parse(await res.json());
+      } catch (error) {
+        // Fallback to mock data if API is unavailable (e.g., static deployment)
+        console.warn("API unavailable, using mock events data");
+        return mockEvents;
+      }
     },
   });
 }
