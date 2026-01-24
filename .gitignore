@@ -2,18 +2,19 @@
 node_modules/
 package-lock.json
 
-# Build outputs
-# dist/ (commented out - we're committing dist for Netlify static deploy)
+# Build outputs (except dist/ which we commit for static deploy)
+# dist/ (committed)
 build/
 .next/
 out/
+*.tsbuildinfo
 
 # Environment
 .env
 .env.local
 .env.*.local
 
-# Database
+# Database (local development only)
 *.db
 *.db-shm
 *.db-wal
@@ -27,8 +28,24 @@ out/
 .DS_Store
 .AppleDouble
 .LSOverride
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # OS
+.local/
+.replit
+replit.md
+attached_assets/
+
+# Temp
+.turbo/
+.next/
+.eslintcache# OS
 .DS_Store
 Thumbs.db
 .replit
