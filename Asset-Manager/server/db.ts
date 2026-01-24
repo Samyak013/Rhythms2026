@@ -1,14 +1,23 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
 import * as schema from "@shared/schema";
+import { drizzle } from "drizzle-orm/better-sqlite3";
+import Database from "better-sqlite3";
+import pg from "pg";
+import { drizzle as pgDrizzle } from "drizzle-orm/node-postgres";
 
 const { Pool } = pg;
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
+let db: any;
+let pool: any;
+
+if (process.env.NODE_ENV === "production" && process.env.DATABASE_URL) {
+  // Production: Use PostgreSQL
+  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  db = pgDrizzle(pool, { schema });
+} else {
+  // Development: Use SQLite
+  const sqlite = new Database("dev.db");
+  sqlite.pragma("journal_mode = WAL");
+  db = drizzle(sqlite, { schema });
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
+export { db, pool };
