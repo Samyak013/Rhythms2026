@@ -21,7 +21,8 @@ export default function Events() {
   const registeredEventIds = new Set(myRegistrations?.map(r => r.eventId));
 
   const filteredEvents = events?.filter(event => {
-    const matchesSearch = event.name.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = event.name.toLowerCase().includes(search.toLowerCase()) || 
+                         event.description.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = selectedCategory === "All" || event.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
