@@ -3,7 +3,7 @@ command = "npm ci --prefer-offline && npm run build"
 publish = "dist/public"
 
 [build.environment]
-NODE_VERSION = "18.17.0"
+NODE_VERSION = "20.17.0"
 NODE_ENV = "production"
 
 # SPA routing - serve index.html for all non-file routes
