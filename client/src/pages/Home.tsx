@@ -298,13 +298,13 @@ export default function Home() {
             transition={{ duration: 1.5 }}
           >
             <div className="flex flex-col items-center mb-4">
-              <h2 className="text-2xl md:text-4xl font-bold tracking-[0.4em] text-[#d4c5a9] mb-4 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              <h2 className="text-lg md:text-3xl lg:text-4xl font-bold tracking-[0.3em] md:tracking-[0.4em] text-[#d4c5a9] mb-4 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 ACPCE PRESENTS
               </h2>
               <img 
                 src={logoc} 
                 alt="RHYTHMS 2026" 
-                className="h-64 md:h-80 lg:h-[420px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                className="h-80 md:h-[420px] lg:h-[550px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
               />
             </div>
             
