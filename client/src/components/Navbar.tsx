@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, User as UserIcon, LogOut, Ticket } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "../../assets/logo.png";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -25,14 +26,11 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-            <div className="flex flex-col items-center leading-none">
-              <span className="text-[8px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-primary/60 font-mono uppercase mb-0.5 ml-0.5 sm:ml-1">
-                ACPCE
-              </span>
-              <span className="font-display text-xl sm:text-2xl font-bold tracking-[0.1em] sm:tracking-[0.2em] text-foreground group-hover:text-primary transition-all duration-700 uppercase">
-                RHYTHMS<span className="text-primary text-shadow-victorian text-lg sm:text-2xl">2026</span>
-              </span>
-            </div>
+            <img 
+              src={logo} 
+              alt="RHYTHMS 2026" 
+              className="h-20 sm:h-28 object-contain transition-transform duration-700 group-hover:scale-110"
+            />
           </Link>
 
           {/* Desktop Nav */}
