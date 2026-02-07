@@ -241,7 +241,7 @@ export default function Home() {
         {showUFO && <UFOLoadingScreen onComplete={() => setShowUFO(false)} />}
       </AnimatePresence>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#0a0806]">
+      <section className="relative min-h-screen flex items-center justify-center overflow-x-hidden bg-[#0a0806] py-20">
         {/* Sherlock Victorian Background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(60,40,20,0.15),transparent_70%)]" />
@@ -297,14 +297,14 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className="flex flex-col items-center mb-0">
-              <h2 className="text-2xl md:text-4xl font-bold tracking-[0.4em] text-[#d4c5a9] mb-6 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <div className="flex flex-col items-center mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold tracking-[0.4em] text-[#d4c5a9] mb-4 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 ACPCE PRESENTS
               </h2>
               <img 
                 src={logoc} 
                 alt="RHYTHMS 2026" 
-                className="h-96 md:h-[450px] lg:h-[550px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                className="h-64 md:h-80 lg:h-[420px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
               />
             </div>
             

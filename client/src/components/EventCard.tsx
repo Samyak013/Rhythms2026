@@ -77,7 +77,7 @@ export function EventCard({ event, isRegistered, onRegister, isRegistering }: Ev
             onClick={() => onRegister(event.id)}
             variant={isRegistered ? "outline" : "default"}
           >
-            {isRegistered ? "Solved" : isRegistering ? "Registering..." : "Examine Case"}
+            {isRegistered ? "Solved" : isRegistering ? "Registering..." : "Enter the Arena"}
           </Button>
         </CardFooter>
       </Card>
