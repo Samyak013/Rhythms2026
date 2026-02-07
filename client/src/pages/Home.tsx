@@ -6,230 +6,228 @@ import { useState, useEffect } from "react";
 import logoc from "../../assets/logoc.png";
 import ufo from "../../assets/ufo.png";
 
-// Seeded random for consistent star/particle positions across renders
-function seededRandom(seed: number) {
+// Seeded random for consistent positions
+function sr(seed: number) {
   const x = Math.sin(seed * 9301 + 49297) * 49297;
   return x - Math.floor(x);
 }
 
-const STARS = Array.from({ length: 120 }, (_, i) => ({
-  left: seededRandom(i) * 100,
-  top: seededRandom(i + 200) * 100,
-  size: seededRandom(i + 400) > 0.85 ? 3 : seededRandom(i + 400) > 0.5 ? 2 : 1,
-  dur: 1.5 + seededRandom(i + 600) * 3,
-  del: seededRandom(i + 800) * 3,
+// Pre-compute star data
+const STARS = Array.from({ length: 60 }, (_, i) => ({
+  x: sr(i) * 100,
+  y: sr(i + 200) * 100,
+  s: sr(i + 400) > 0.9 ? 3 : sr(i + 400) > 0.5 ? 2 : 1,
+  d: 2 + sr(i + 600) * 3,
+  dl: sr(i + 800) * 2,
 }));
 
-const SHOOTING_STARS = Array.from({ length: 5 }, (_, i) => ({
-  startX: 10 + seededRandom(i + 1000) * 60,
-  startY: seededRandom(i + 1100) * 30,
-  delay: 1 + i * 1.8 + seededRandom(i + 1200) * 1.5,
-}));
-
-const BEAM_PARTICLES = Array.from({ length: 18 }, (_, i) => ({
-  x: -20 + seededRandom(i + 1300) * 40,
-  delay: 2.8 + seededRandom(i + 1400) * 2,
-  dur: 1.2 + seededRandom(i + 1500) * 1,
-  size: 2 + seededRandom(i + 1600) * 3,
-}));
+// Warp streaks for hyperspace effect
+const WARP_LINES = Array.from({ length: 30 }, (_, i) => {
+  const angle = (i / 30) * Math.PI * 2;
+  const dist = 20 + sr(i + 900) * 30;
+  return {
+    x: 50 + Math.cos(angle) * dist,
+    y: 50 + Math.sin(angle) * dist,
+    angle: (angle * 180) / Math.PI,
+    len: 40 + sr(i + 1000) * 80,
+    delay: sr(i + 1100) * 0.4,
+  };
+});
 
 function UFOLoadingScreen({ onComplete }: { onComplete: () => void }) {
+  const [phase, setPhase] = useState<"warp" | "arrive" | "beam">("warp");
+
   useEffect(() => {
-    const timer = setTimeout(onComplete, 5500);
-    return () => clearTimeout(timer);
+    const t1 = setTimeout(() => setPhase("arrive"), 1800);
+    const t2 = setTimeout(() => setPhase("beam"), 3200);
+    const t3 = setTimeout(onComplete, 5200);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at 50% 30%, #0d0b12 0%, #050408 50%, #000000 100%)" }}
-      exit={{ opacity: 0, scale: 1.05 }}
-      transition={{ duration: 1.0, ease: "easeInOut" }}
+      className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden"
+      style={{ background: "#000" }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
     >
-      {/* Nebula / deep space ambient glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute w-[600px] h-[600px] left-[-10%] top-[-10%] rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #6b5ce7, transparent 70%)" }} />
-        <div className="absolute w-[500px] h-[500px] right-[-15%] bottom-[-15%] rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #e7a85c, transparent 70%)" }} />
-      </div>
-
-      {/* Layered starfield */}
-      <div className="absolute inset-0 z-[1]">
-        {STARS.map((s, i) => (
+      {/* === PHASE 1: Warp speed starfield === */}
+      <AnimatePresence>
+        {phase === "warp" && (
           <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${s.left}%`,
-              top: `${s.top}%`,
-              width: s.size,
-              height: s.size,
-              background: s.size === 3 ? "rgba(255,240,200,0.9)" : "rgba(255,255,255,0.8)",
-              boxShadow: s.size === 3 ? "0 0 4px rgba(255,220,150,0.5)" : "none",
-            }}
-            animate={{ opacity: [0.1, 0.9, 0.1] }}
-            transition={{ duration: s.dur, repeat: Infinity, delay: s.del, ease: "easeInOut" }}
-          />
-        ))}
-      </div>
-
-      {/* Shooting stars */}
-      {SHOOTING_STARS.map((ss, i) => (
-        <motion.div
-          key={`ss-${i}`}
-          className="absolute z-[2] h-[1px] rounded-full"
-          style={{
-            left: `${ss.startX}%`,
-            top: `${ss.startY}%`,
-            width: 60 + i * 15,
-            background: "linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent)",
-            transformOrigin: "left center",
-            rotate: 25 + i * 5,
-          }}
-          initial={{ opacity: 0, scaleX: 0, x: 0 }}
-          animate={{ opacity: [0, 0.8, 0], scaleX: [0, 1, 1], x: [0, 120, 200] }}
-          transition={{ delay: ss.delay, duration: 0.8, ease: "easeOut" }}
-        />
-      ))}
-
-      {/* UFO + Beam unified container */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center"
-        initial={{ y: -500, x: 400, scale: 0.15, rotate: -30, opacity: 0 }}
-        animate={{
-          y: [-500, -200, -60],
-          x: [400, 100, 0],
-          scale: [0.15, 0.6, 1],
-          rotate: [-30, -10, 0],
-          opacity: [0, 1, 1],
-        }}
-        transition={{ duration: 2.5, ease: [0.33, 0, 0.2, 1], times: [0, 0.5, 1] }}
-      >
-        {/* Pulsing energy ring */}
-        <motion.div
-          className="absolute z-[5] rounded-full border"
-          style={{
-            width: 280, height: 60,
-            left: "50%", top: "28%",
-            transform: "translate(-50%, -50%)",
-            borderColor: "rgba(255,220,80,0.15)",
-          }}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: [0, 0.6, 0.2, 0.5], scale: [0.8, 1.1, 0.95, 1.05] }}
-          transition={{ delay: 2.5, duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Multi-layer glow */}
-        <motion.div
-          className="absolute rounded-full blur-3xl z-[1]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.3, 0.15, 0.25] }}
-          transition={{ delay: 1.8, duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          style={{ width: 350, height: 350, left: "50%", top: "15%", transform: "translate(-50%, -50%)", background: "radial-gradient(circle, rgba(255,220,80,0.35), rgba(180,140,60,0.1) 60%, transparent 80%)" }}
-        />
-        <motion.div
-          className="absolute rounded-full blur-2xl z-[2]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.5, 0.3] }}
-          transition={{ delay: 2, duration: 2, ease: "easeOut" }}
-          style={{ width: 180, height: 180, left: "50%", top: "15%", transform: "translate(-50%, -50%)", background: "radial-gradient(circle, rgba(255,240,150,0.2), transparent 70%)" }}
-        />
-
-        {/* UFO image with hover bob */}
-        <motion.img
-          src={ufo}
-          alt="UFO"
-          className="h-44 md:h-56 object-contain relative z-10 drop-shadow-[0_0_30px_rgba(255,220,80,0.3)]"
-          animate={{ y: [0, -10, 0], rotate: [0, 1, -1, 0] }}
-          transition={{ delay: 2.5, duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Small orbiting light */}
-        <motion.div
-          className="absolute z-[15] w-2 h-2 rounded-full"
-          style={{ background: "rgba(255,220,80,0.8)", boxShadow: "0 0 8px rgba(255,220,80,0.6)", top: "22%", left: "50%", transformOrigin: "0px -70px" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.8, 0.4, 0.8], rotate: 360 }}
-          transition={{ opacity: { delay: 2.8, duration: 2, repeat: Infinity }, rotate: { delay: 2.8, duration: 4, repeat: Infinity, ease: "linear" } }}
-        />
-
-        {/* Screen flash on beam activation */}
-        <motion.div
-          className="fixed inset-0 z-[100] pointer-events-none"
-          style={{ background: "rgba(255,240,150,1)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.15, 0] }}
-          transition={{ delay: 2.6, duration: 0.4, ease: "easeOut" }}
-        />
-
-        {/* Beam directly connected to UFO — no gap */}
-        <motion.div
-          className="relative -mt-3 z-[5]"
-          style={{ width: 180, height: 350, transformOrigin: "top center" }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ delay: 2.6, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-        >
-          {/* Glow at beam origin (under UFO) */}
-          <motion.div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 rounded-full blur-md z-[6]"
-            style={{ background: "rgba(255,230,80,0.5)" }}
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          />
-          {/* Outer beam */}
-          <div className="absolute inset-0" style={{ clipPath: "polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)", background: "linear-gradient(to bottom, rgba(255,220,50,0.4), rgba(255,200,50,0.08) 70%, transparent)" }} />
-          {/* Core beam */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ clipPath: "polygon(40% 0%, 60% 0%, 82% 100%, 18% 100%)", background: "linear-gradient(to bottom, rgba(255,235,80,0.65), rgba(255,220,50,0.15) 60%, transparent)" }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          />
-          {/* Beam edge lines */}
-          <motion.div
-            className="absolute h-full"
-            style={{ left: "28%", width: 1, background: "linear-gradient(to bottom, rgba(255,230,80,0.4), transparent)", transformOrigin: "top" }}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ delay: 2.7, duration: 0.6 }}
-          />
-          <motion.div
-            className="absolute h-full"
-            style={{ right: "28%", width: 1, background: "linear-gradient(to bottom, rgba(255,230,80,0.4), transparent)", transformOrigin: "top" }}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ delay: 2.7, duration: 0.6 }}
-          />
-
-          {/* Floating particles in beam */}
-          {BEAM_PARTICLES.map((p, i) => (
+            className="absolute inset-0 z-[1]"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Central bright point */}
             <motion.div
-              key={`bp-${i}`}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ width: 6, height: 6, background: "#fff", boxShadow: "0 0 40px 15px rgba(255,255,255,0.3)" }}
+              animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+            />
+            {/* Warp streaks radiating from center */}
+            {WARP_LINES.map((w, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${w.x}%`,
+                  top: `${w.y}%`,
+                  width: 2,
+                  height: w.len,
+                  background: `linear-gradient(to bottom, transparent, rgba(200,220,255,0.7), transparent)`,
+                  transformOrigin: "center top",
+                  rotate: w.angle + 90,
+                }}
+                initial={{ scaleY: 0, opacity: 0 }}
+                animate={{ scaleY: [0, 1, 1.5], opacity: [0, 0.8, 0] }}
+                transition={{ duration: 1.2, delay: w.delay, repeat: Infinity, repeatDelay: 0.2, ease: "easeOut" }}
+              />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* === Ambient stars (visible in arrive + beam phases) === */}
+      {phase !== "warp" && (
+        <div className="absolute inset-0 z-[1]">
+          {STARS.map((s, i) => (
+            <motion.div
+              key={i}
               className="absolute rounded-full"
               style={{
-                left: `calc(50% + ${p.x}px)`,
-                top: 0,
-                width: p.size,
-                height: p.size,
-                background: "rgba(255,230,100,0.7)",
-                boxShadow: "0 0 4px rgba(255,220,80,0.4)",
+                left: `${s.x}%`, top: `${s.y}%`,
+                width: s.s, height: s.s,
+                background: s.s === 3 ? "rgba(255,240,200,0.9)" : "rgba(255,255,255,0.7)",
               }}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: [0, 0.8, 0], y: [0, 340] }}
-              transition={{ delay: p.delay, duration: p.dur, repeat: Infinity, ease: "easeIn" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.8, 0.3] }}
+              transition={{ duration: s.d, repeat: Infinity, delay: s.dl, ease: "easeInOut" }}
             />
           ))}
+        </div>
+      )}
 
-          {/* Ground glow / impact */}
+      {/* === PHASE 2 & 3: UFO + Beam === */}
+      {phase !== "warp" && (
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Arrival shockwave ring */}
           <motion.div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-60 h-8 rounded-full blur-xl"
-            style={{ background: "rgba(255,220,50,0.2)" }}
-            initial={{ opacity: 0, scaleX: 0.3 }}
-            animate={{ opacity: [0, 0.6, 0.3, 0.5], scaleX: [0.3, 1.1, 0.9, 1] }}
-            transition={{ delay: 3, duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute z-[3] rounded-full border-2"
+            style={{
+              width: 300, height: 300,
+              left: "50%", top: "50%",
+              transform: "translate(-50%, -50%)",
+              borderColor: "rgba(255,255,255,0.4)",
+            }}
+            initial={{ scale: 0, opacity: 0.8 }}
+            animate={{ scale: [0, 3], opacity: [0.8, 0] }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           />
-        </motion.div>
-      </motion.div>
+
+          {/* White flash on arrival */}
+          <motion.div
+            className="fixed inset-0 z-[100] pointer-events-none bg-white"
+            initial={{ opacity: 0.6 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          />
+
+          {/* Glow halo behind UFO */}
+          <motion.div
+            className="absolute rounded-full blur-3xl z-[1]"
+            style={{
+              width: 350, height: 350,
+              left: "50%", top: "40%",
+              transform: "translate(-50%, -50%)",
+              background: "radial-gradient(circle, rgba(255,220,80,0.25), transparent 70%)",
+            }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 0.5, 0.3], scale: [0.5, 1.1, 1] }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+
+          {/* UFO — materializes with scale pop */}
+          <motion.div
+            className="relative z-10"
+            initial={{ scale: 0, opacity: 0, y: -20 }}
+            animate={{ scale: [0, 1.15, 1], opacity: [0, 1, 1], y: [-20, 0, 0] }}
+            transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1], times: [0, 0.6, 1] }}
+          >
+            <motion.img
+              src={ufo}
+              alt="UFO"
+              className="h-40 md:h-52 object-contain drop-shadow-[0_0_40px_rgba(255,220,80,0.4)]"
+              animate={phase === "beam" ? { y: [0, -8, 0] } : {}}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+
+          {/* === PHASE 3: Light beam === */}
+          {phase === "beam" && (
+            <motion.div
+              className="relative -mt-2 z-[5] flex flex-col items-center"
+              style={{ width: 200 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Bright source glow at beam top */}
+              <motion.div
+                className="absolute -top-1 left-1/2 -translate-x-1/2 w-24 h-5 rounded-full blur-lg z-[6]"
+                style={{ background: "rgba(255,230,80,0.7)" }}
+                animate={{ opacity: [0.5, 0.9, 0.5], scaleX: [0.9, 1.1, 0.9] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              {/* Beam body — expands downward */}
+              <motion.div
+                className="relative overflow-hidden"
+                style={{ width: 200, height: 380, transformOrigin: "top center" }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              >
+                {/* Outer beam */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    clipPath: "polygon(28% 0%, 72% 0%, 100% 100%, 0% 100%)",
+                    background: "linear-gradient(to bottom, rgba(255,220,50,0.35), rgba(255,200,50,0.06) 75%, transparent)",
+                  }}
+                />
+                {/* Inner core beam — pulsing */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    clipPath: "polygon(38% 0%, 62% 0%, 84% 100%, 16% 100%)",
+                    background: "linear-gradient(to bottom, rgba(255,235,80,0.6), rgba(255,220,50,0.1) 65%, transparent)",
+                  }}
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Light scan line sweeping down beam */}
+                <motion.div
+                  className="absolute w-full h-10"
+                  style={{ background: "linear-gradient(to bottom, transparent, rgba(255,240,100,0.25), transparent)" }}
+                  animate={{ y: [-40, 380] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 0.5 }}
+                />
+              </motion.div>
+
+              {/* Ground impact glow */}
+              <motion.div
+                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-72 h-10 rounded-full blur-2xl"
+                style={{ background: "rgba(255,220,50,0.2)" }}
+                initial={{ opacity: 0, scaleX: 0.2 }}
+                animate={{ opacity: [0, 0.5, 0.3, 0.5], scaleX: [0.2, 1, 0.85, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+          )}
+        </div>
+      )}
     </motion.div>
   );
 }
