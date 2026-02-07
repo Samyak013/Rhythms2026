@@ -31,7 +31,7 @@ export default function About() {
         initial="hidden"
         animate="show"
         variants={containerVariants}
-        className="space-y-24"
+        className="space-y-12 md:space-y-24"
       >
         {/* Intro Section */}
         <section className="text-center max-w-3xl mx-auto space-y-8">
@@ -55,15 +55,15 @@ export default function About() {
 
         {/* Dress Code Section */}
         <section>
-          <motion.div variants={itemVariants} className="flex flex-col items-center gap-4 mb-16 text-center">
+          <motion.div variants={itemVariants} className="flex flex-col items-center gap-4 mb-8 md:mb-16 text-center">
             <Compass className="w-8 h-8 text-primary opacity-60" />
-            <h2 className="text-3xl font-display font-bold text-[#d4c5a9] tracking-[0.3em] uppercase">The Daily Uniforms</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-[#d4c5a9] tracking-[0.15em] md:tracking-[0.3em] uppercase">The Daily Uniforms</h2>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {days.map((day, idx) => (
               <motion.div key={idx} variants={itemVariants}>
-                <Card className="p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all duration-500 h-full text-center group">
+                <Card className="p-5 sm:p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all duration-500 h-full text-center group">
                   <div className="w-12 h-12 border border-primary/20 flex items-center justify-center mx-auto mb-6 group-hover:border-primary transition-colors">
                     <span className="font-mono text-primary text-sm">0{idx + 1}</span>
                   </div>

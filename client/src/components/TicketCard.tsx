@@ -38,13 +38,13 @@ export function TicketCard({ registration, user }: TicketCardProps) {
           <Badge variant="outline" className="mb-4 mx-auto text-[10px] tracking-widest border-primary/30 text-primary bg-primary/5 rounded-none uppercase">
             {registration.event.category}
           </Badge>
-          <h3 className="text-2xl font-bold font-display text-[#d4c5a9] tracking-wider uppercase">
+          <h3 className="text-xl sm:text-2xl font-bold font-display text-[#d4c5a9] tracking-wider uppercase">
             {registration.event.name}
           </h3>
           <p className="text-[10px] text-primary font-mono mt-2 tracking-[0.4em] uppercase opacity-60">Official Credentials</p>
         </CardHeader>
 
-        <CardContent className="flex flex-col items-center gap-8 py-10">
+        <CardContent className="flex flex-col items-center gap-5 sm:gap-8 py-6 sm:py-10">
           <div className="p-4 bg-white/5 border border-primary/10 relative group-hover:border-primary/40 transition-colors duration-700">
             <QRCodeSVG 
               value={qrData} 

@@ -37,20 +37,20 @@ export default function Tickets() {
       </div>
 
       {registrations && registrations.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {registrations.map((reg) => (
             <TicketCard key={reg.id} registration={reg} user={user} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-24 bg-[#0e0c0a]/60 backdrop-blur-3xl border border-primary/10 rounded-none max-w-2xl mx-auto">
+        <div className="text-center py-12 md:py-24 bg-[#0e0c0a]/60 backdrop-blur-3xl border border-primary/10 rounded-none max-w-2xl mx-auto">
           <div className="w-20 h-20 border border-primary/20 flex items-center justify-center mx-auto mb-8">
             <TicketIcon className="w-8 h-8 text-primary opacity-40" />
           </div>
           <h3 className="text-xl font-bold mb-3 text-[#d4c5a9] tracking-widest uppercase">No Solved Cases</h3>
-          <p className="text-[#a89984] text-xs tracking-widest uppercase mb-10 opacity-60">You haven't registered for any clues yet.</p>
+          <p className="text-[#a89984] text-xs tracking-widest uppercase mb-6 md:mb-10 opacity-60">You haven't registered for any clues yet.</p>
           <Link href="/events">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/80 rounded-none h-14 px-12 uppercase tracking-[0.4em] text-xs shadow-xl transition-all duration-500">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/80 rounded-none h-12 sm:h-14 px-8 sm:px-12 uppercase tracking-[0.2em] sm:tracking-[0.4em] text-xs shadow-xl transition-all duration-500">
               Browse Leads
             </Button>
           </Link>

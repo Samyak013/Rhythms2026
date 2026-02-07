@@ -29,7 +29,7 @@ export function Navbar() {
             <img 
               src={logo} 
               alt="RHYTHMS 2026" 
-              className="h-20 sm:h-28 object-contain transition-transform duration-700 group-hover:scale-110"
+              className="h-14 sm:h-20 md:h-24 object-contain transition-transform duration-700 group-hover:scale-110"
             />
           </Link>
 

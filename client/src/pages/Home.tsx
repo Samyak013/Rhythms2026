@@ -304,22 +304,22 @@ export default function Home() {
               <img 
                 src={logoc} 
                 alt="RHYTHMS 2026" 
-                className="h-80 md:h-[420px] lg:h-[550px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                className="h-56 sm:h-72 md:h-[420px] lg:h-[550px] w-full max-w-[90vw] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
               />
             </div>
             
-            <p className="text-[#a89984] text-base md:text-lg max-w-2xl mx-auto mb-8 font-light italic tracking-[0.15em] leading-relaxed -mt-2">
+            <p className="text-[#a89984] text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 font-light italic tracking-[0.1em] sm:tracking-[0.15em] leading-relaxed -mt-2 px-2">
               "When you have eliminated the impossible, whatever remains, however improbable, must be the truth."
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <Link href="/events">
-                <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground min-w-[240px] h-14 text-sm uppercase tracking-[0.3em] rounded-none shadow-xl transition-all duration-500">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center w-full px-4">
+              <Link href="/events" className="w-full sm:w-auto">
+                <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground w-full sm:w-auto sm:min-w-[240px] h-12 sm:h-14 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] rounded-none shadow-xl transition-all duration-500">
                   Begin Investigation <Compass className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link href="/about">
-                <Button size="lg" variant="outline" className="border-primary/20 text-[#a89984] hover:bg-primary/5 min-w-[240px] h-14 text-sm tracking-[0.3em] uppercase rounded-none">
+              <Link href="/about" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="border-primary/20 text-[#a89984] hover:bg-primary/5 w-full sm:w-auto sm:min-w-[240px] h-12 sm:h-14 text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase rounded-none">
                   The Case File
                 </Button>
               </Link>
@@ -334,7 +334,7 @@ export default function Home() {
 
       {/* Stats Section with Victorian Icons */}
       <section className="bg-[#0e0c0a] border-y border-primary/10 py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-16 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 text-center relative z-10">
           <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
             <Calendar className="w-8 h-8 mx-auto text-primary mb-6 opacity-60" />
             <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">March 5-6, 2026</h3>
@@ -354,16 +354,16 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden bg-[#0a0806]">
+      <section className="py-16 md:py-32 relative overflow-hidden bg-[#0a0806]">
         <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-10 tracking-[0.3em] text-[#d4c5a9]">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold mb-6 md:mb-10 tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] text-[#d4c5a9]">
             Enrol in the Agency
           </h2>
-          <p className="text-lg text-[#a89984] mb-14 tracking-[0.1em] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-[#a89984] mb-8 md:mb-14 tracking-[0.05em] md:tracking-[0.1em] max-w-2xl mx-auto leading-relaxed px-2">
             The city of London... or rather, ACPCE, calls for its brightest minds. Registrations are now open for the inquisitive.
           </p>
           <Link href="/register">
-            <Button size="lg" className="bg-[#d4c5a9] text-[#0a0806] hover:bg-[#c4b599] px-16 py-8 text-sm uppercase tracking-[0.5em] rounded-none shadow-2xl transition-all duration-700 hover:scale-105">
+            <Button size="lg" className="bg-[#d4c5a9] text-[#0a0806] hover:bg-[#c4b599] px-8 sm:px-16 py-5 sm:py-8 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.5em] rounded-none shadow-2xl transition-all duration-700 hover:scale-105">
               Secure Entry
             </Button>
           </Link>
