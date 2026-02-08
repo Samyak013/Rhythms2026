@@ -258,24 +258,24 @@ export default function Home() {
 
         {/* Floating Mystery Cards */}
         {[
-          { name: "Pyramids of Giza", icon: "△", pos: { top: "10%", left: "6%" }, delay: 0, duration: 7 },
-          { name: "Bermuda Triangle", icon: "▽", pos: { top: "22%", right: "5%" }, delay: 1, duration: 8 },
-          { name: "Existence of Aliens", icon: "◎", pos: { bottom: "32%", left: "4%" }, delay: 0.5, duration: 6 },
-          { name: "Area 51", icon: "⊘", pos: { bottom: "18%", right: "6%" }, delay: 1.5, duration: 7.5 },
-          { name: "City of Atlantis", icon: "◇", pos: { top: "58%", left: "10%" }, delay: 2, duration: 6.5 },
-          { name: "Black Holes", icon: "●", pos: { top: "14%", right: "18%" }, delay: 0.8, duration: 8.5 },
-          { name: "Zodiac Cipher", icon: "⟐", pos: { bottom: "38%", right: "14%" }, delay: 1.2, duration: 7 },
+          { name: "Pyramids of Giza", icon: "△", pos: { top: "4%", left: "2%" }, delay: 0, duration: 7 },
+          { name: "Bermuda Triangle", icon: "▽", pos: { top: "8%", right: "2%" }, delay: 1, duration: 8 },
+          { name: "Existence of Aliens", icon: "◎", pos: { bottom: "28%", left: "1%" }, delay: 0.5, duration: 6 },
+          { name: "Area 51", icon: "⊘", pos: { bottom: "14%", right: "2%" }, delay: 1.5, duration: 7.5 },
+          { name: "City of Atlantis", icon: "◇", pos: { top: "58%", left: "3%" }, delay: 2, duration: 6.5 },
+          { name: "Black Holes", icon: "●", pos: { top: "14%", right: "14%" }, delay: 0.8, duration: 8.5 },
+          { name: "Zodiac Cipher", icon: "⟐", pos: { bottom: "34%", right: "4%" }, delay: 1.2, duration: 7 },
         ].map((item, i) => (
           <motion.div
             key={i}
-            className="absolute z-[2] hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] backdrop-blur-sm border border-primary/10 shadow-[0_0_15px_rgba(0,0,0,0.3)] select-none pointer-events-none"
+            className="absolute z-[2] flex items-center gap-1 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 rounded-lg bg-white/[0.03] backdrop-blur-sm border border-primary/10 shadow-[0_0_15px_rgba(0,0,0,0.3)] select-none pointer-events-none"
             style={item.pos}
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 0.6, 0.4, 0.7, 0.5], y: [0, -12, 0] }}
             transition={{ opacity: { duration: item.duration, repeat: Infinity, delay: item.delay }, y: { duration: item.duration, repeat: Infinity, ease: "easeInOut", delay: item.delay } }}
           >
-            <span className="text-primary/50 text-sm font-mono">{item.icon}</span>
-            <span className="text-[10px] font-mono tracking-[0.15em] text-primary/40 uppercase whitespace-nowrap">{item.name}</span>
+            <span className="text-primary/50 text-[10px] sm:text-sm font-mono">{item.icon}</span>
+            <span className="text-[7px] sm:text-[10px] font-mono tracking-[0.1em] sm:tracking-[0.15em] text-primary/40 uppercase whitespace-nowrap">{item.name}</span>
           </motion.div>
         ))}
 
