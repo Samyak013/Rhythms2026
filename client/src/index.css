@@ -10,34 +10,34 @@
   --font-body: 'Montserrat', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  /* Victorian Color Palette */
-  --background: 35 20% 5%;    /* Deep Mahogany/Obsidian */
-  --foreground: 45 30% 85%;   /* Aged Parchment */
+  /* Victorian Color Palette — Bronze & Silver */
+  --background: 240 5% 5%;    /* Deep Charcoal */
+  --foreground: 240 5% 82%;   /* Silver Parchment */
   
-  /* Gold/Brass for Victorian accents */
-  --primary: 45 50% 45%; 
-  --primary-foreground: 35 20% 5%;
+  /* Bronze for Victorian accents */
+  --primary: 25 45% 60%; 
+  --primary-foreground: 240 5% 5%;
 
-  /* Deep Forest Green / Ink Blue */
-  --secondary: 160 30% 15%;
-  --secondary-foreground: 45 30% 85%;
+  /* Deep Slate Blue */
+  --secondary: 220 20% 15%;
+  --secondary-foreground: 240 5% 82%;
 
-  /* Muted tones - Smoked Tobacco */
-  --muted: 35 15% 10%;
-  --muted-foreground: 35 10% 50%;
+  /* Muted tones - Gunmetal */
+  --muted: 240 5% 10%;
+  --muted-foreground: 240 5% 45%;
 
-  /* Cards - Leather/Wood feel */
-  --card: 35 20% 7%;
-  --card-foreground: 45 30% 85%;
+  /* Cards - Dark Steel */
+  --card: 240 5% 7%;
+  --card-foreground: 240 5% 82%;
 
-  /* Borders - Brass/Iron */
-  --border: 45 20% 15%;
-  --input: 45 20% 15%;
+  /* Borders - Brushed Metal */
+  --border: 25 15% 18%;
+  --input: 25 15% 18%;
   
   --destructive: 0 60% 30%;
   --destructive-foreground: 210 40% 98%;
 
-  --ring: 45 50% 45%;
+  --ring: 25 45% 60%;
   --radius: 0px; 
 }
 
@@ -64,7 +64,7 @@
 
 @layer utilities {
   .text-shadow-victorian {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px hsla(45, 50%, 45%, 0.3);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px hsla(25, 45%, 60%, 0.3);
   }
   
   .parchment-panel {
@@ -72,12 +72,12 @@
   }
 
   .magnify-glow {
-    box-shadow: 0 0 30px hsla(45, 50%, 45%, 0.2);
+    box-shadow: 0 0 30px hsla(25, 45%, 60%, 0.2);
   }
 
   .typewriter {
     overflow: hidden;
-    border-right: .15em solid orange;
+    border-right: .15em solid #c9956b;
     white-space: nowrap;
     margin: 0 auto;
     animation: 
@@ -92,7 +92,7 @@
 
   @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: orange; }
+    50% { border-color: #c9956b; }
   }
 
   .hide-scrollbar {

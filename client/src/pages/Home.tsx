@@ -285,7 +285,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5 }}
-            className="mb-8"
+            className="mb-2"
           >
             <h2 className="text-primary tracking-[0.8em] font-mono text-[10px] md:text-xs uppercase opacity-60">
               The Game is Afoot
@@ -297,8 +297,8 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className="flex flex-col items-center mb-4">
-              <h2 className="text-lg md:text-3xl lg:text-4xl font-bold tracking-[0.3em] md:tracking-[0.4em] text-[#d4c5a9] mb-4 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <div className="flex flex-col items-center mb-1">
+              <h2 className="text-lg md:text-3xl lg:text-4xl font-bold tracking-[0.3em] md:tracking-[0.4em] text-[#d4c5a9] mb-1 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 ACPCE PRESENTS
               </h2>
               <img 
@@ -308,7 +308,7 @@ export default function Home() {
               />
             </div>
             
-            <p className="text-[#a89984] text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 font-light italic tracking-[0.1em] sm:tracking-[0.15em] leading-relaxed -mt-2 px-2">
+            <p className="text-[#a89984] text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 font-light italic tracking-[0.1em] sm:tracking-[0.15em] leading-relaxed -mt-4 px-2">
               "When you have eliminated the impossible, whatever remains, however improbable, must be the truth."
             </p>
             
