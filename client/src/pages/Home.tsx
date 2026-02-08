@@ -304,7 +304,7 @@ export default function Home() {
               <img 
                 src={logoc} 
                 alt="RHYTHMS 2026" 
-                className="h-56 sm:h-72 md:h-[420px] lg:h-[550px] w-full max-w-[90vw] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                className="h-72 sm:h-96 md:h-[520px] lg:h-[680px] w-full max-w-[95vw] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
               />
             </div>
             
