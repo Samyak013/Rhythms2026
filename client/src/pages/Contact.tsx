@@ -35,13 +35,15 @@ export default function Contact() {
 
       <div className="grid grid-cols-1 gap-8 md:gap-12 max-w-4xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-          <Card className="p-5 sm:p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all text-center">
+          <a href="https://share.google/5bGtIX3jN5M7HPHC7" target="_blank" rel="noopener noreferrer" className="block">
+          <Card className="p-5 sm:p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all text-center cursor-pointer">
             <MapPin className="w-6 h-6 text-primary mx-auto mb-4 opacity-60" />
             <h3 className="font-bold text-xs mb-2 text-[#d4c5a9] uppercase tracking-widest">The Agency</h3>
             <p className="text-[#a89984]/60 text-[10px] uppercase font-mono leading-relaxed">
               A.C. Patil College,<br />Kharghar, Navi Mumbai
             </p>
           </Card>
+          </a>
 
           <Card className="p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all text-center">
             <Mail className="w-6 h-6 text-primary mx-auto mb-4 opacity-60" />
