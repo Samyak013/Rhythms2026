@@ -1,37 +1,37 @@
-import { pgTable, text, serial, integer, timestamp } from "drizzle-orm/pg-core";
+import { mysqlTable, text, serial, int, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// === TABLE DEFINITIONS ===
+// === TABLE DEFINITIONS (MySQL) ===
 
-export const users = pgTable("users", {
+export const users = mysqlTable("users", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  prn: text("prn").notNull().unique(),
-  dob: text("dob").notNull(), // DDMMYYYY format as requested
-  college: text("college").notNull(),
-  branch: text("branch").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  prn: varchar("prn", { length: 100 }).notNull().unique(),
+  dob: varchar("dob", { length: 8 }).notNull(), // DDMMYYYY format as requested
+  college: varchar("college", { length: 255 }).notNull(),
+  branch: varchar("branch", { length: 255 }).notNull(),
 });
 
-export const events = pgTable("events", {
+export const events = mysqlTable("events", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  category: text("category").notNull(), // On-Stage, On-Ground, etc.
+  name: varchar("name", { length: 255 }).notNull(),
+  category: varchar("category", { length: 100 }).notNull(), // On-Stage, On-Ground, etc.
   description: text("description").notNull(),
-  entryFee: integer("entry_fee").notNull(),
-  prizeFirst: integer("prize_first"),
-  prizeSecond: integer("prize_second"),
-  teamSize: text("team_size").notNull(), // Solo, Duet, Group
-  venue: text("venue"),
-  date: text("date"), // 5th or 6th March
+  entryFee: int("entry_fee").notNull(),
+  prizeFirst: int("prize_first"),
+  prizeSecond: int("prize_second"),
+  teamSize: varchar("team_size", { length: 50 }).notNull(), // Solo, Duet, Group
+  venue: varchar("venue", { length: 255 }),
+  date: varchar("date", { length: 50 }), // 5th or 6th March
 });
 
-export const registrations = pgTable("registrations", {
+export const registrations = mysqlTable("registrations", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
-  eventId: integer("event_id").notNull(),
-  ticketCode: text("ticket_code").notNull().unique(), // For QR/Unique ID
+  userId: int("user_id").notNull(),
+  eventId: int("event_id").notNull(),
+  ticketCode: varchar("ticket_code", { length: 100 }).notNull().unique(), // For QR/Unique ID
   registeredAt: timestamp("registered_at").defaultNow(),
 });
 
