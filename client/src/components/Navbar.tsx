@@ -56,7 +56,7 @@ export function Navbar() {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-2 sm:gap-4">
-            {user ? (
+            {user && (
               <div className="flex items-center gap-2 sm:gap-4">
                 <Link href="/tickets">
                   <Button variant="outline" size="sm" className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary text-xs sm:text-sm">
@@ -77,12 +77,6 @@ export function Navbar() {
                   <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
               </div>
-            ) : (
-              <Link href="/login">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_15px_-3px_var(--primary)] transition-all hover:scale-105 text-xs sm:text-sm py-1.5 sm:py-2">
-                  Login / Register
-                </Button>
-              </Link>
             )}
           </div>
 
@@ -118,8 +112,8 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-white/10">
-                {user ? (
+              {user && (
+                <div className="pt-4 border-t border-white/10">
                   <div className="space-y-4">
                     <div className="text-sm text-muted-foreground">
                       Signed in as <span className="text-foreground">{user.prn}</span>
@@ -140,14 +134,8 @@ export function Navbar() {
                       <LogOut className="w-4 h-4" /> Logout
                     </Button>
                   </div>
-                ) : (
-                  <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full bg-primary text-primary-foreground">
-                      Login / Register
-                    </Button>
-                  </Link>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </motion.div>
         )}

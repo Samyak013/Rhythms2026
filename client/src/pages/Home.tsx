@@ -233,12 +233,21 @@ function UFOLoadingScreen({ onComplete }: { onComplete: () => void }) {
 }
 
 export default function Home() {
-  const [showUFO, setShowUFO] = useState(true);
+  const [showUFO, setShowUFO] = useState(() => {
+    // Check if UFO animation has been shown before
+    const hasSeenUFO = sessionStorage.getItem('hasSeenUFO');
+    return !hasSeenUFO;
+  });
+
+  const handleUFOComplete = () => {
+    setShowUFO(false);
+    sessionStorage.setItem('hasSeenUFO', 'true');
+  };
 
   return (
     <div className="min-h-screen">
       <AnimatePresence>
-        {showUFO && <UFOLoadingScreen onComplete={() => setShowUFO(false)} />}
+        {showUFO && <UFOLoadingScreen onComplete={handleUFOComplete} />}
       </AnimatePresence>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-x-hidden bg-[#0a0806] py-20">
@@ -281,17 +290,6 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5 }}
-            className="mb-2"
-          >
-            <h2 className="text-primary tracking-[0.8em] font-mono text-[10px] md:text-xs uppercase opacity-60">
-              The Game is Afoot
-            </h2>
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -337,7 +335,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 text-center relative z-10">
           <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
             <Calendar className="w-8 h-8 mx-auto text-primary mb-6 opacity-60" />
-            <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">March 5-6, 2026</h3>
+            <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">Feb 25 - Mar 6, 2026</h3>
             <p className="text-[#a89984]/50 mt-4 font-mono text-[10px] tracking-[0.3em] uppercase">The Event Horizon</p>
           </motion.div>
           <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
