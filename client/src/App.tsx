@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Events from "@/pages/Events";
+import Sponsors from "@/pages/Sponsors";
 import Tickets from "@/pages/Tickets";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
@@ -34,6 +35,11 @@ function Router() {
         <Route path="/events">
           <PageTransition>
             <Events />
+          </PageTransition>
+        </Route>
+        <Route path="/sponsors">
+          <PageTransition>
+            <Sponsors />
           </PageTransition>
         </Route>
         <Route path="/tickets">
