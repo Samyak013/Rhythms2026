@@ -2,8 +2,9 @@ import { type Event } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Users, MapPin, Trophy } from "lucide-react";
+import { Calendar, Users, MapPin, Trophy, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { REGISTRATION_FORM_URL } from "@/config/registration";
 
 interface EventCardProps {
   event: Event;
@@ -70,14 +71,11 @@ export function EventCard({ event, isRegistered, onRegister, isRegistering }: Ev
 
         <CardFooter className="pt-4 sm:pt-6 pb-6 sm:pb-8 border-t border-primary/5 px-4 sm:px-6">
           <Button 
-            className={`w-full rounded-none tracking-[0.2em] uppercase text-[10px] sm:text-xs h-10 sm:h-12 transition-all duration-500 ${isRegistered 
-              ? "bg-primary/10 text-primary border border-primary/30" 
-              : "bg-primary text-primary-foreground hover:bg-primary/80 shadow-lg"}`}
-            disabled={isRegistered || isRegistering}
-            onClick={() => onRegister(event.id)}
-            variant={isRegistered ? "outline" : "default"}
+            className="w-full rounded-none tracking-[0.2em] uppercase text-[10px] sm:text-xs h-10 sm:h-12 transition-all duration-500 bg-primary text-primary-foreground hover:bg-primary/80 shadow-lg gap-2"
+            onClick={() => window.open(REGISTRATION_FORM_URL, '_blank')}
+            variant="default"
           >
-            {isRegistered ? "Solved" : isRegistering ? "Registering..." : "Enter the Arena"}
+            Register Now <ExternalLink className="w-3 h-3" />
           </Button>
         </CardFooter>
       </Card>

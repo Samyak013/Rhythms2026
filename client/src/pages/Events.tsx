@@ -1,24 +1,18 @@
 import { useState } from "react";
-import { useEvents, useRegisterEvent, useMyRegistrations } from "@/hooks/use-events";
-import { useAuth } from "@/hooks/use-auth";
+import { useEvents } from "@/hooks/use-events";
 import { EventCard } from "@/components/EventCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Search, Filter } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Events() {
   const { data: events, isLoading: eventsLoading } = useEvents();
-  const { data: myRegistrations } = useMyRegistrations();
-  const { user } = useAuth();
-  const { mutate: register, isPending: isRegistering } = useRegisterEvent();
   
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  const categories = ["All", "On-Stage", "On-Ground", "Fine Arts", "Literary", "Gaming"];
-
-  const registeredEventIds = new Set(myRegistrations?.map(r => r.eventId));
+  const categories = ["All", "On-Stage", "On-Ground", "Fine Arts"];
 
   const filteredEvents = events?.filter(event => {
     const matchesSearch = event.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -35,12 +29,8 @@ export default function Events() {
     );
   }
 
-  const handleRegister = (eventId: number) => {
-    if (!user) {
-      setLocation("/login");
-      return;
-    }
-    register({ eventId, userId: user.id });
+  const handleRegister = () => {
+    // Registration handled by Google Form
   };
 
   return (
@@ -92,9 +82,9 @@ export default function Events() {
               <EventCard 
                 key={event.id} 
                 event={event} 
-                isRegistered={registeredEventIds.has(event.id)}
+                isRegistered={false}
                 onRegister={handleRegister}
-                isRegistering={isRegistering}
+                isRegistering={false}
               />
             ))}
           </div>
