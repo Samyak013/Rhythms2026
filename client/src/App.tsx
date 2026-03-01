@@ -4,11 +4,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/Navbar";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 // Pages
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Events from "@/pages/Events";
+import Schedule from "@/pages/Schedule";
 import Sponsors from "@/pages/Sponsors";
 import Tickets from "@/pages/Tickets";
 import Contact from "@/pages/Contact";
@@ -18,6 +20,10 @@ import NotFound from "@/pages/not-found";
 
 function Router() {
   const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <AnimatePresence mode="wait">
@@ -35,6 +41,11 @@ function Router() {
         <Route path="/events">
           <PageTransition>
             <Events />
+          </PageTransition>
+        </Route>
+        <Route path="/schedule">
+          <PageTransition>
+            <Schedule />
           </PageTransition>
         </Route>
         <Route path="/sponsors">
@@ -99,7 +110,7 @@ function App() {
         {/* Simple Footer */}
         <footer className="border-t border-white/5 bg-black/80 py-8 text-center text-sm text-muted-foreground backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4">
-            <p className="tracking-widest font-mono text-xs uppercase">&copy; 2026 RHYTHMS. The legend unfolds.</p>
+            <p className="tracking-widest font-mono text-xs uppercase">2026 RHYTHMS. Mysteries of the World</p>
             <p className="mt-2 text-[10px] opacity-30 uppercase tracking-[0.2em]">Designed for A.C. Patil College of Engineering</p>
           </div>
         </footer>

@@ -24,7 +24,8 @@ export const events = mysqlTable("events", {
   prizeSecond: int("prize_second"),
   teamSize: varchar("team_size", { length: 50 }).notNull(), // Solo, Duet, Group
   venue: varchar("venue", { length: 255 }),
-  date: varchar("date", { length: 50 }), // 5th or 6th March
+  date: varchar("date", { length: 50 }), // 4th, 5th or 6th March
+  time: varchar("time", { length: 100 }), // 10:00 am – 11:00 am
 });
 
 export const registrations = mysqlTable("registrations", {

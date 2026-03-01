@@ -1,10 +1,9 @@
 import { type Event } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Calendar, Users, MapPin, Trophy, ExternalLink } from "lucide-react";
+import { Calendar, MapPin, Trophy, Clock } from "lucide-react";
 import { motion } from "framer-motion";
-import { REGISTRATION_FORM_URL } from "@/config/registration";
+import { getRegistrationURL } from "@/config/registration";
 
 interface EventCardProps {
   event: Event;
@@ -14,6 +13,10 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, isRegistered, onRegister, isRegistering }: EventCardProps) {
+  const registrationURL = getRegistrationURL(event.name);
+  
+  const prizeDisplay = event.prizeFirst === 0 ? "₹0" : event.prizeFirst ? `₹${event.prizeFirst}` : "₹—";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,57 +29,68 @@ export function EventCard({ event, isRegistered, onRegister, isRegistering }: Ev
         <div className="absolute top-0 right-0 w-16 h-16 border-r border-t border-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         <div className="absolute bottom-0 left-0 w-16 h-16 border-l border-b border-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         
-        <CardHeader className="pb-3 pt-6 px-4 sm:px-6">
-          <div className="flex justify-between items-start gap-2 sm:gap-4">
-            <div className="flex-1 min-w-0">
-              <Badge variant="outline" className="mb-2 text-[10px] tracking-widest border-primary/30 text-primary bg-primary/5 rounded-none uppercase inline-block">
-                {event.category}
-              </Badge>
-              <h3 className="text-lg sm:text-xl font-bold font-display text-[#d4c5a9] group-hover:text-primary transition-colors tracking-wider break-words">
-                {event.name}
-              </h3>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <span className="block text-xl sm:text-2xl font-bold text-primary opacity-80 whitespace-nowrap">₹{event.entryFee}</span>
-            </div>
-          </div>
+        <CardHeader className="pb-4 pt-6 px-4 sm:px-6 border-b border-primary/5">
+          <h3 className="text-lg sm:text-xl font-bold font-display text-[#d4c5a9] group-hover:text-primary transition-colors tracking-wider">
+            {event.name}
+          </h3>
         </CardHeader>
 
-        <CardContent className="flex-grow space-y-4 sm:space-y-6 pt-2 px-4 sm:px-6">
-          <p className="text-[#a89984] text-xs sm:text-sm line-clamp-3 leading-relaxed italic opacity-70">
-            {event.description}
-          </p>
+        <CardContent className="flex-grow space-y-4 pt-6 px-4 sm:px-6">
+          {/* Description */}
+          <div>
+            <p className="text-[#a89984] text-xs sm:text-sm leading-relaxed italic opacity-75">
+              {event.description}
+            </p>
+          </div>
           
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 text-[9px] sm:text-[10px] text-[#a89984] font-mono uppercase tracking-widest">
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
-              <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary/60 flex-shrink-0" />
-              <span className="truncate">{event.date}</span>
+          <div className="space-y-3 text-xs sm:text-sm">
+            {/* Date */}
+            <div className="flex items-start gap-2 sm:gap-3">
+              <Calendar className="w-4 h-4 sm:w-4 sm:h-4 text-primary/70 flex-shrink-0 mt-0.5" />
+              <div className="text-[#a89984] font-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                Date: <span className="text-[#d4c5a9] font-semibold">{event.date}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
-              <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary/60 flex-shrink-0" />
-              <span className="truncate">{event.venue || "TBA"}</span>
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-hidden">
-              <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary/60 flex-shrink-0" />
-              <span className="truncate">{event.teamSize}</span>
-            </div>
-            {event.prizeFirst && (
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary flex-shrink-0" />
-                <span className="text-primary font-bold truncate">₹{event.prizeFirst}</span>
+
+            {/* Time */}
+            {event.time && (
+              <div className="flex items-start gap-2 sm:gap-3">
+                <Clock className="w-4 h-4 sm:w-4 sm:h-4 text-primary/70 flex-shrink-0 mt-0.5" />
+                <div className="text-[#a89984] font-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                  Time: <span className="text-[#d4c5a9] font-semibold">{event.time}</span>
+                </div>
               </div>
             )}
+
+            {/* Venue */}
+            {event.venue && (
+              <div className="flex items-start gap-2 sm:gap-3">
+                <MapPin className="w-4 h-4 sm:w-4 sm:h-4 text-primary/70 flex-shrink-0 mt-0.5" />
+                <div className="text-[#a89984] font-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                  Venue: <span className="text-[#d4c5a9] font-semibold">{event.venue}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Prize Pool */}
+            <div className="flex items-start gap-2 sm:gap-3">
+              <Trophy className="w-4 h-4 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
+              <div className="text-[#a89984] font-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                Prize Pool: <span className="text-primary font-bold">{prizeDisplay}</span>
+              </div>
+            </div>
           </div>
         </CardContent>
 
-        <CardFooter className="pt-4 sm:pt-6 pb-6 sm:pb-8 border-t border-primary/5 px-4 sm:px-6">
-          <Button 
-            className="w-full rounded-none tracking-[0.2em] uppercase text-[10px] sm:text-xs h-10 sm:h-12 transition-all duration-500 bg-primary text-primary-foreground hover:bg-primary/80 shadow-lg gap-2"
-            onClick={() => window.open(REGISTRATION_FORM_URL, '_blank')}
-            variant="default"
-          >
-            Register Now <ExternalLink className="w-3 h-3" />
-          </Button>
+        <CardFooter className="pt-6 pb-6 px-4 sm:px-6 border-t border-primary/5">
+          <a href={registrationURL} target="_blank" rel="noopener noreferrer" className="w-full">
+            <Button 
+              className="w-full rounded-none tracking-[0.2em] uppercase text-[10px] sm:text-xs h-10 sm:h-12 transition-all duration-500 bg-primary text-primary-foreground hover:bg-primary/80 shadow-lg"
+              variant="default"
+            >
+              Register Now
+            </Button>
+          </a>
         </CardFooter>
       </Card>
     </motion.div>

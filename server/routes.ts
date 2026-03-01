@@ -142,47 +142,44 @@ export async function registerRoutes(
 
 async function seedDatabase() {
   const existing = await storage.getEvents();
-  if (existing.length > 0) return;
-
+  
+  // Only seed if we don't have all 21 events yet
+  if (existing.length >= 21) {
+    return;
+  }
+  
+  // Seed all events
   const events = [
-    // Dance
-    { name: "Solo Dance", category: "On-Stage", description: "Showcase your solo moves.", entryFee: 100, prizeFirst: 1000, prizeSecond: 800, teamSize: "Solo", date: "5th March" },
-    { name: "Duet Dance", category: "On-Stage", description: "Sync with your partner.", entryFee: 150, prizeFirst: 1000, prizeSecond: 800, teamSize: "Duet", date: "5th March" },
-    { name: "Group Dance", category: "On-Stage", description: "Ideally 6-12 members.", entryFee: 500, prizeFirst: 3000, prizeSecond: 2000, teamSize: "Group", date: "6th March" },
-    
-    // Singing
-    { name: "Solo Singing", category: "On-Stage", description: "Melodious voices.", entryFee: 100, prizeFirst: 1000, prizeSecond: 800, teamSize: "Solo", date: "5th March" },
-    { name: "Duet Singing", category: "On-Stage", description: "Harmonize together.", entryFee: 150, prizeFirst: 1000, prizeSecond: 800, teamSize: "Duet", date: "5th March" },
-    
-    // Fashion
-    { name: "Fashion Show", category: "On-Stage", description: "Walk the ramp.", entryFee: 1500, prizeFirst: 7000, prizeSecond: 4000, teamSize: "Group", date: "6th March" },
-    
-    // On-Ground
-    { name: "Antakshari", category: "On-Ground", description: "Musical battle.", entryFee: 250, prizeFirst: 1500, prizeSecond: 1000, teamSize: "Group", date: "5th March" },
-    { name: "Flashmob", category: "On-Ground", description: "Surprise the crowd.", entryFee: 0, prizeFirst: 0, prizeSecond: 0, teamSize: "Group", date: "5th March" },
-    
-    // Dramatics
-    { name: "Skit", category: "Seminar Hall", description: "Short play.", entryFee: 500, prizeFirst: 1000, prizeSecond: 800, teamSize: "Group", date: "6th March" },
-    { name: "Mono Act", category: "Seminar Hall", description: "One person act.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "6th March" },
-    
-    // Literary
-    { name: "Story Telling", category: "Literary Arts", description: "Spin a yarn.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "5th March" },
-    { name: "Poem Recitation", category: "Literary Arts", description: "Express with words.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "5th March" },
-    { name: "Stand-Up Comedy", category: "Literary Arts", description: "Make us laugh.", entryFee: 100, prizeFirst: 1000, prizeSecond: 500, teamSize: "Solo", date: "6th March" },
-    
-    // Fine Arts
-    { name: "Sketching", category: "Fine Arts", description: "Pencil magic.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "5th March" },
-    { name: "Mandala Art", category: "Fine Arts", description: "Intricate patterns.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "5th March" },
-    { name: "Rangoli", category: "Fine Arts", description: "Colorful designs.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Group", date: "5th March" },
-    
-    // Misc
-    { name: "Treasure Hunt", category: "Miscellaneous", description: "Find the clues.", entryFee: 150, prizeFirst: 1000, prizeSecond: 800, teamSize: "Group", date: "6th March" },
-    { name: "Rose Day", category: "Miscellaneous", description: "Spread love.", entryFee: 50, prizeFirst: 0, prizeSecond: 0, teamSize: "Solo", date: "5th March" },
-    { name: "Rellography", category: "Miscellaneous", description: "Reel making contest.", entryFee: 50, prizeFirst: 500, prizeSecond: 250, teamSize: "Solo", date: "5th March" },
-    { name: "Attire Spectra", category: "Miscellaneous", description: "Best dressed.", entryFee: 200, prizeFirst: 1000, prizeSecond: 800, teamSize: "Solo", date: "6th March" },
+    // 4th March 2026
+    { name: "Story Telling", category: "On-Ground", description: "Spin a yarn", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1-2", venue: "TBA", date: "4th March 2026", time: "10:00 am – 11:00 am" },
+    { name: "Poem Recitation", category: "On-Ground", description: "Express with words", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1", venue: "TBA", date: "4th March 2026", time: "11:00 am – 12:00 pm" },
+    { name: "Sketching", category: "Fine Arts", description: "Pencil magic", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1", venue: "TBA", date: "4th March 2026", time: "11:30 am – 01:00 pm" },
+    { name: "Treasure Hunt", category: "On-Ground", description: "Find the clues", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "4-6", venue: "Activity Area", date: "4th March 2026", time: "12:00 pm – 01:30 pm" },
+    { name: "Rangoli", category: "Fine Arts", description: "Colorful designs", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1-3", venue: "Activity Area", date: "4th March 2026", time: "12:00 pm – 02:00 pm" },
+    { name: "Attire Spectra", category: "On-Ground", description: "Best dressed", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "1", venue: "Activity Area", date: "4th March 2026", time: "01:30 pm – 02:30 pm" },
+    { name: "Reelography", category: "On-Ground", description: "Reel making contest", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "2-4", venue: "Activity Area", date: "4th March 2026", time: "01:30 pm – 02:30 pm" },
+    { name: "Mandala Art", category: "Fine Arts", description: "Intricate patterns", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1", venue: "TBA", date: "4th March 2026", time: "02:00 pm – 03:00 pm" },
+    { name: "Short Film Competition", category: "On-Ground", description: "Short film screening", entryFee: 0, prizeFirst: 0, prizeSecond: null, teamSize: "3-5", venue: "Seminar Hall (Room No-125)", date: "4th March 2026", time: "02:00 pm onwards" },
+
+    // 5th March 2026
+    { name: "Rose Day", category: "On-Ground", description: "Spread love", entryFee: 0, prizeFirst: 0, prizeSecond: null, teamSize: "1", venue: "On Stage", date: "5th March 2026", time: "02:00 pm – 02:30 pm" },
+    { name: "Flashmob", category: "On-Ground", description: "Surprise the crowd", entryFee: 0, prizeFirst: 0, prizeSecond: null, teamSize: "6-12", venue: "On Ground", date: "5th March 2026", time: "02:30 pm – 03:00 pm" },
+    { name: "Antakshari", category: "On-Ground", description: "Musical battle", entryFee: 0, prizeFirst: 1500, prizeSecond: null, teamSize: "6-10", venue: "On Ground", date: "5th March 2026", time: "03:00 pm – 04:00 pm" },
+    { name: "Solo Singing", category: "On-Stage", description: "Melodious voices", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "1", venue: "On Stage", date: "5th March 2026", time: "04:00 pm – 05:30 pm" },
+    { name: "Duet Singing", category: "On-Stage", description: "Harmonize together", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "2", venue: "On Stage", date: "5th March 2026", time: "04:00 pm – 05:30 pm" },
+    { name: "Solo Dance", category: "On-Stage", description: "Showcase your solo moves", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "1", venue: "On Stage", date: "5th March 2026", time: "05:30 pm – 06:30 pm" },
+    { name: "Duet Dance", category: "On-Stage", description: "Sync with your partner", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "2", venue: "On Stage", date: "5th March 2026", time: "05:30 pm – 06:30 pm" },
+
+    // 6th March 2026
+    { name: "Swarsandhya", category: "On-Stage", description: "Classical / semi-classical singing", entryFee: 0, prizeFirst: 0, prizeSecond: null, teamSize: "1", venue: "Seminar Hall (Room No-125)", date: "6th March 2026", time: "11:00 am – 12:30 pm" },
+    { name: "Dramatics / Skit", category: "On-Stage", description: "Short play", entryFee: 0, prizeFirst: 1000, prizeSecond: null, teamSize: "3-8", venue: "Seminar Hall (Room No-125)", date: "6th March 2026", time: "02:00 pm – 02:30 pm" },
+    { name: "Mono Act", category: "On-Stage", description: "One person act", entryFee: 0, prizeFirst: 500, prizeSecond: null, teamSize: "1", venue: "Seminar Hall (Room No-125)", date: "6th March 2026", time: "02:00 pm – 02:30 pm" },
+    { name: "Group Dance", category: "On-Stage", description: "Ideally 6–12 members", entryFee: 0, prizeFirst: 3000, prizeSecond: null, teamSize: "6-12", venue: "On Stage", date: "6th March 2026", time: "04:30 pm – 06:00 pm" },
+    { name: "Fashion Show", category: "On-Stage", description: "Walk the ramp", entryFee: 0, prizeFirst: 7000, prizeSecond: null, teamSize: "8-12", venue: "On Stage", date: "6th March 2026", time: "06:00 pm – 07:30 pm" },
   ];
 
   for (const event of events) {
     await storage.createEvent(event);
   }
+  console.log(`Seeded ${events.length} events`);
 }

@@ -15,6 +15,7 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/events", label: "Events" },
+    { href: "/schedule", label: "Schedule" },
     { href: "/sponsors", label: "Sponsors" },
     { href: "/contact", label: "Contact" },
   ];

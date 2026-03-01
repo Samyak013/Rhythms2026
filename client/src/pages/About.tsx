@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { User, Sparkles, Shirt, Compass, Camera, Instagram, Award, Users } from "lucide-react";
+import { User, Sparkles, Shirt, Compass, Camera, Instagram, Award, Users, Calendar, Clock, MapPin } from "lucide-react";
 
 export default function About() {
   const containerVariants = {
@@ -38,20 +38,15 @@ export default function About() {
         {/* Intro Section */}
         <section className="text-center max-w-3xl mx-auto space-y-8">
           <motion.div variants={itemVariants} className="flex flex-col items-center">
-             <span className="text-[10px] tracking-[1em] text-primary font-mono uppercase mb-4 opacity-60">
-                The Dossier
-              </span>
             <h1 className="text-4xl md:text-6xl font-display font-bold text-[#d4c5a9] tracking-[0.2em]">
               RHYTHMS <span className="text-primary">2026</span>
             </h1>
           </motion.div>
-          <motion.p variants={itemVariants} className="text-lg text-[#a89984] leading-relaxed italic opacity-80">
-            "Education is what remains when one has forgotten what one has learned."
-            <span className="block mt-4 not-italic font-light">
-              Rhythms 2026 is a journey into the Victorian shadows of creativity. 
-              Step into Baker Street at ACPCE, where the clues of culture and the evidence 
-              of talent converge in a grand investigation of the arts.
-            </span>
+          <motion.p variants={itemVariants} className="text-lg text-[#a89984] leading-relaxed italic font-light opacity-80">
+            "Where secrets awaken and cultures collide"
+          </motion.p>
+          <motion.p variants={itemVariants} className="text-lg text-[#a89984] leading-relaxed not-italic font-light opacity-80">
+            Rhythms 2026 – Mysteries of the World invites you into a realm where culture meets curiosity and creativity hides behind every clue. Inspired by Victorian intrigue and global enigmas, ACPCE transforms into a stage of mysteries, where art, fashion, music, and talent unfold like an unsolved case. From timeless traditions to modern expressions, each moment is a discovery—each performance, a revelation. Step in, explore the unknown, and become part of the mystery.
           </motion.p>
         </section>
 

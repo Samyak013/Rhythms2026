@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useEvents } from "@/hooks/use-events";
 import { EventCard } from "@/components/EventCard";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,15 @@ export default function Events() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const categories = ["All", "On-Stage", "On-Ground", "Fine Arts"];
+
+  // Parse query parameter on component mount/location change
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const eventParam = params.get("event");
+    if (eventParam) {
+      setSearch(decodeURIComponent(eventParam));
+    }
+  }, []);
 
   const filteredEvents = events?.filter(event => {
     const matchesSearch = event.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -40,9 +49,6 @@ export default function Events() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-[#d4c5a9]">
             The <span className="text-primary">Evidence</span>
           </h1>
-          <p className="text-[#a89984] text-sm sm:text-base max-w-2xl mx-auto italic px-2">
-            "The world is full of obvious things which nobody by any chance ever observes." - Choose your lead.
-          </p>
         </div>
 
         {/* Filters */}
@@ -57,7 +63,7 @@ export default function Events() {
           />
         </div>
         
-        <div className="flex gap-2 overflow-x-auto pb-2 hide-scrollbar" style={{ scrollBehavior: 'smooth' }}>
+        <div className="flex gap-2 overflow-x-auto pb-2 hide-scrollbar custom-events-scroll">
           {categories.map((cat) => (
             <Button
               key={cat}

@@ -33,7 +33,8 @@ async function initDb() {
       prize_second INT,
       team_size VARCHAR(50) NOT NULL,
       venue VARCHAR(255),
-      date VARCHAR(50)
+      date VARCHAR(50),
+      time VARCHAR(100)
     );
   `);
 

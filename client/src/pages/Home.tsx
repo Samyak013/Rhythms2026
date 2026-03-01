@@ -1,10 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Calendar, Music, ArrowRight, Star, Compass, Shield, Zap } from "lucide-react";
+import { Calendar, Music, ArrowRight, Star, Compass, Shield, Zap, Crown, Award } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
 import logoc from "../../assets/logoc.png";
 import ufo from "../../assets/ufo.png";
+import titleSponsorLogo from "../../assets/titlesponsor.png";
+import sponsor1Logo from "../../assets/sponsor1.jpeg";
+import sponsor2Logo from "../../assets/sponsor2.jpeg";
+import sponsor3Logo from "../../assets/sponsor3.jpeg";
 
 // Seeded random for consistent positions
 function sr(seed: number) {
@@ -190,7 +195,7 @@ function UFOLoadingScreen({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               >
                 {/* Outer beam */}
-                <div
+                <motion.div
                   className="absolute inset-0"
                   style={{
                     clipPath: "polygon(28% 0%, 72% 0%, 100% 100%, 0% 100%)",
@@ -295,30 +300,30 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className="flex flex-col items-center mb-1">
-              <h2 className="text-lg md:text-3xl lg:text-4xl font-bold tracking-[0.3em] md:tracking-[0.4em] text-[#d4c5a9] mb-1 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <div className="flex flex-col items-center mb-1 mt-4 sm:mt-8">
+              <h2 className="text-[0.4rem] md:text-[0.6rem] lg:text-xs font-bold tracking-[0.3em] md:tracking-[0.4em] text-[#d4c5a9] mb-0 font-display uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 ACPCE PRESENTS
               </h2>
               <img 
                 src={logoc} 
                 alt="RHYTHMS 2026" 
-                className="h-72 sm:h-96 md:h-[520px] lg:h-[680px] w-full max-w-[95vw] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                className="h-[900px] sm:h-[880px] md:h-[1040px] lg:h-[1200px] w-full max-w-[95vw] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] -mt-56 sm:-mt-44 md:-mt-60 lg:-mt-72"
               />
             </div>
             
-            <p className="text-[#a89984] text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 font-light italic tracking-[0.1em] sm:tracking-[0.15em] leading-relaxed -mt-4 px-2">
+            <p className="text-[#a89984] text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-6 md:mb-8 font-light italic tracking-[0.1em] sm:tracking-[0.15em] leading-relaxed -mt-36 sm:-mt-20 md:-mt-24 px-2">
               "When you have eliminated the impossible, whatever remains, however improbable, must be the truth."
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center w-full px-4">
               <Link href="/events" className="w-full sm:w-auto">
                 <Button size="lg" className="bg-primary hover:bg-primary/80 text-primary-foreground w-full sm:w-auto sm:min-w-[240px] h-12 sm:h-14 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] rounded-none shadow-xl transition-all duration-500">
-                  Begin Investigation <Compass className="ml-2 w-4 h-4" />
+                  Explore Events <Compass className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link href="/about" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="border-primary/20 text-[#a89984] hover:bg-primary/5 w-full sm:w-auto sm:min-w-[240px] h-12 sm:h-14 text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase rounded-none">
-                  The Case File
+                  Schedule
                 </Button>
               </Link>
             </div>
@@ -332,10 +337,10 @@ export default function Home() {
 
       {/* Stats Section with Victorian Icons */}
       <section className="bg-[#0e0c0a] border-y border-primary/10 py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 text-center relative z-10">
           <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
             <Calendar className="w-8 h-8 mx-auto text-primary mb-6 opacity-60" />
-            <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">Feb 25 - Mar 6, 2026</h3>
+            <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">5-6 March 2026</h3>
             <p className="text-[#a89984]/50 mt-4 font-mono text-[10px] tracking-[0.3em] uppercase">The Event Horizon</p>
           </motion.div>
           <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
@@ -343,32 +348,96 @@ export default function Home() {
             <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">20+ Mysteries</h3>
             <p className="text-[#a89984]/50 mt-4 font-mono text-[10px] tracking-[0.3em] uppercase">The Challenges</p>
           </motion.div>
-          <motion.div whileHover={{ y: -10 }} className="p-8 group cursor-default">
-            <Shield className="w-8 h-8 mx-auto text-primary mb-6 opacity-60" />
-            <h3 className="text-xl font-bold font-display text-[#d4c5a9] tracking-[0.2em]">Grand Reward</h3>
-            <p className="text-[#a89984]/50 mt-4 font-mono text-[10px] tracking-[0.3em] uppercase">₹1 Lakh Prize</p>
-          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-32 relative overflow-hidden bg-[#0a0806]">
-        <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-bold mb-6 md:mb-10 tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] text-[#d4c5a9]">
-            Enrol in the Agency
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-[#a89984] mb-8 md:mb-14 tracking-[0.05em] md:tracking-[0.1em] max-w-2xl mx-auto leading-relaxed px-2">
-            The city of London... or rather, ACPCE, calls for its brightest minds. Registrations are now open for the inquisitive.
-          </p>
-          <Link href="/register">
-            <Button size="lg" className="bg-[#d4c5a9] text-[#0a0806] hover:bg-[#c4b599] px-8 sm:px-16 py-5 sm:py-8 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.5em] rounded-none shadow-2xl transition-all duration-700 hover:scale-105">
-              Secure Entry
-            </Button>
-          </Link>
+      {/* Compact Sponsors Section */}
+      <section className="py-16 md:py-24 relative overflow-hidden bg-[#0a0806]">
+        <div className="max-w-6xl mx-auto px-4">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <span className="text-[10px] tracking-[1em] text-primary font-mono uppercase mb-4 block opacity-60">
+              Our Partners
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-[#d4c5a9] tracking-[0.2em] uppercase">
+              OUR <span className="text-primary">SPONSORS</span>
+            </h2>
+          </div>
+
+          {/* Title Sponsor */}
+          <div className="mb-12">
+            <motion.div 
+              className="flex flex-col items-center gap-3 mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Crown className="w-8 h-8 text-primary opacity-60" />
+              <h3 className="text-xl md:text-2xl font-display font-bold text-[#d4c5a9] tracking-[0.2em] uppercase">
+                Title Sponsor
+              </h3>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-xl mx-auto"
+            >
+              <Card className="p-8 md:p-10 bg-gradient-to-br from-primary/20 via-[#0e0c0a]/80 to-[#0e0c0a]/60 border-primary/30 rounded-none hover:border-primary/50 transition-all duration-500 text-center group">
+                <div className="flex items-center justify-center">
+                  <img src={titleSponsorLogo} alt="Title Sponsor" className="h-24 md:h-28 object-contain" />
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Regular Sponsors */}
+          <div>
+            <motion.div 
+              className="flex flex-col items-center gap-3 mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Award className="w-6 h-6 text-primary opacity-60" />
+              <h3 className="text-lg md:text-xl font-display font-bold text-[#d4c5a9] tracking-[0.2em] uppercase">
+                Sponsors
+              </h3>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {[
+                { logo: sponsor1Logo, name: "Sponsor 1" },
+                { logo: sponsor2Logo, name: "Sponsor 2" },
+                { logo: sponsor3Logo, name: "Sponsor 3" },
+              ].map((sponsor, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <Card className="p-6 md:p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all duration-500 h-full text-center group">
+                    <div className="flex items-center justify-center h-full">
+                      <img src={sponsor.logo} alt={sponsor.name} className="h-20 md:h-24 object-contain" />
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* View All Link */}
+          <div className="text-center mt-10">
+            <Link href="/sponsors">
+              <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary/10 rounded-none px-8 py-3 text-xs uppercase tracking-[0.3em] transition-all duration-300">
+                View All Sponsors
+              </Button>
+            </Link>
+          </div>
         </div>
-        
-        {/* Subtle background fog effect */}
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
       </section>
     </div>
   );

@@ -2,78 +2,79 @@
 
 A full-stack web application for A.C. Patil College of Engineering's cultural festival with event registration and digital ticketing.
 
-**Status:** ✅ Production Ready | 🚀 Ready for Deployment
+**Status:** ✅ Production Ready | 🚀 Deployed on Netlify
 
----
-
-## 🎯 Quick Links
-
-| Document | Purpose |
-|----------|---------|
-| [**STRUCTURE.md**](./STRUCTURE.md) | Detailed project structure |
-| [**DEPLOYMENT.md**](./DEPLOYMENT.md) | Quick 3-step deployment |
-| [**Asset-Manager/README.md**](./Asset-Manager/README.md) | Full project documentation |
-| [**Asset-Manager/NETLIFY_DEPLOY.md**](./Asset-Manager/NETLIFY_DEPLOY.md) | Detailed Netlify guide |
+🔗 **[Live Demo](https://rhythms2026.netlify.app/)**
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Rhythms2026/
-├── Asset-Manager/           # Main application folder
-│   ├── client/             # React frontend
-│   ├── server/             # Express backend
-│   ├── shared/             # Shared types & schemas
-│   ├── dist/               # Build output
-│   ├── README.md           # App documentation
-│   ├── netlify.toml        # Netlify config
-│   └── package.json
+rhythms2026/
+├── client/                 # React frontend (TypeScript)
+│   ├── src/
+│   │   ├── components/    # Reusable React components
+│   │   ├── pages/         # Page components
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── lib/           # Utilities & config
+│   │   └── index.css      # Tailwind styles
+│   └── index.html
 │
-├── STRUCTURE.md            # Project structure guide
-├── DEPLOYMENT.md           # Quick deployment steps
-└── [Config & docs]
+├── server/                 # Express backend (TypeScript)
+│   ├── index.ts           # Server entry point
+│   ├── routes.ts          # API routes
+│   ├── db.ts              # Database connection
+│   └── schema.ts          # Data models
+│
+├── shared/                 # Shared types & schemas
+│   ├── routes.ts          # Route definitions
+│   └── schema.ts          # Shared schemas
+│
+├── script/                 # Build scripts
+├── dist/                   # Production build output
+├── netlify.toml           # Netlify configuration
+└── [Config files]
 ```
-
-**→ See [STRUCTURE.md](./STRUCTURE.md) for complete file listing**
 
 ---
 
 ## 🚀 Quick Start
 
+### Prerequisites
+- Node.js >= 20.19.0
+- npm or yarn
+
 ### Local Development
 ```bash
-cd Asset-Manager
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
-# http://localhost:5000
+# Open http://localhost:5000
 ```
 
 ### Production Build
 ```bash
+# Build for production
 npm run build
-npm run start
+
+# Run production server
+npm start
 ```
 
 ---
 
 ## 🌐 Deployment
 
-### 3-Step Deployment
+The project is deployed on **Netlify** and automatically builds from the main branch.
 
-1. **Frontend → Netlify**
-   - Connect GitHub repo
-   - Auto-builds from `netlify.toml`
-
-2. **Backend → Railway**
-   - Deploy to Railway
-   - Auto-creates PostgreSQL
-
-3. **Connect**
-   - Set `VITE_API_URL` in Netlify
-   - Done! ✅
-
-**→ See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed steps**
+**Key Configuration:**
+- Frontend builds to `dist/public`
+- Auto-redirects for SPA routing
+- Security headers configured
+- Static assets cached
 
 ---
 
@@ -83,15 +84,18 @@ npm run start
 - React 18 + TypeScript
 - Vite + Tailwind CSS
 - Shadcn/UI components
+- TanStack Query for data fetching
 
 ### Backend
 - Express.js + TypeScript
 - Drizzle ORM
-- PostgreSQL (production)
+- SQLite (local) / PostgreSQL (production)
+- Type-safe client generation
 
-### Deployment
-- Netlify (frontend)
-- Railway (backend)
+### Infrastructure
+- **Hosting:** Netlify (Frontend)
+- **Build Tool:** Vite
+- **Package Manager:** npm
 
 ---
 
@@ -101,17 +105,9 @@ npm run start
 - 🎫 Digital ticket generation with QR codes
 - 👤 User authentication (PRN + DOB)
 - 📱 Fully responsive design
-- 🎨 Dark theme UI
+- 🎨 Modern UI with Shadcn/UI components
 - ⚡ Real-time event updates
-
----
-
-## 📚 Documentation
-
-- **[STRUCTURE.md](./STRUCTURE.md)** - Detailed project structure & file organization
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Quick deployment guide
-- **[Asset-Manager/README.md](./Asset-Manager/README.md)** - Full technical documentation
-- **[Asset-Manager/NETLIFY_DEPLOY.md**](./Asset-Manager/NETLIFY_DEPLOY.md) - Comprehensive Netlify guide
+- 🔒 Secure authentication system
 
 ---
 
@@ -121,66 +117,49 @@ npm run start
 # Development
 npm run dev              # Start dev server with hot reload
 
-# Production
+# Building
 npm run build            # Build for production
-npm run start            # Run production server
+npm start                # Run production server
 
-# Utilities
-npm run check            # TypeScript check
-npm run db:push          # Database migrations
+# Database
+npm run db:push          # Push schema to database
+
+# Type Checking
+npm run check            # Run TypeScript type check
 ```
 
 ---
 
-## 📦 Key Directories
+## 📝 Environment Setup
 
-| Directory | Purpose |
-|-----------|---------|
-| **Asset-Manager/client/** | React frontend application |
-| **Asset-Manager/server/** | Express backend server |
-| **Asset-Manager/shared/** | Shared types & schemas |
-| **Asset-Manager/dist/** | Production build output |
+Create a `.env` file based on `.env.example`:
 
----
-
-## 📋 Checklist for Deployment
-
-- ✅ Code is clean and organized
-- ✅ No Replit dependencies
-- ✅ Builds successfully locally
-- ✅ Git repo is up to date
-- ✅ Configuration files are ready
-- ✅ Documentation is complete
-
-**→ Ready to deploy! Follow [DEPLOYMENT.md](./DEPLOYMENT.md)**
+```bash
+VITE_API_URL=http://localhost:5000
+```
 
 ---
 
-## 🎯 Next Steps
+## 👨‍💻 Development
 
-1. ✅ Code is ready
-2. ⏳ Connect Netlify to GitHub
-3. ⏳ Deploy backend to Railway
-4. ⏳ Set environment variables
-5. ⏳ Test live deployment
+The project uses Vite for fast development builds and React for the frontend. TypeScript ensures type safety across the codebase.
 
----
+### File Organization
 
-## 📞 Support
-
-- Detailed guides in [Asset-Manager/](./Asset-Manager/)
-- Deployment help in [DEPLOYMENT.md](./DEPLOYMENT.md)
-- Structure reference in [STRUCTURE.md](./STRUCTURE.md)
+- **Components** are reusable and located in `client/src/components/`
+- **Pages** represent routes and are in `client/src/pages/`
+- **Hooks** contain custom React logic in `client/src/hooks/`
+- **Server routes** are defined in `server/routes.ts`
+- **Database schema** is managed with Drizzle ORM
 
 ---
 
-## Event Details
+## 📄 License
 
+MIT
+
+---
+
+**Event:** RHYTHMS 2026 - A.C. Patil College of Engineering  
 **Festival Date:** March 5th & 6th, 2026  
-**Venue:** A.C. Patil College of Engineering
-
----
-
-**Repository:** https://github.com/Samyak013/Rhythms2026  
-**Status:** ✅ Production Ready  
-**Last Updated:** January 24, 2026
+**Repository:** https://github.com/Samyak013/Rhythms2026

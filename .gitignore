@@ -2,8 +2,7 @@
 node_modules/
 package-lock.json
 
-# Build outputs (except dist/ which we commit for static deploy)
-# dist/ (committed)
+# Build outputs (dist/ is committed for static deploy)
 build/
 .next/
 out/
@@ -25,10 +24,14 @@ out/
 *.swp
 *.swo
 *~
+
+# OS
 .DS_Store
 .AppleDouble
 .LSOverride
 Thumbs.db
+.local/
+.replit
 
 # Logs
 *.log
@@ -36,26 +39,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# OS
-.local/
-.replit
-replit.md
-attached_assets/
-
-# Temp
+# Temp & Cache
 .turbo/
-.next/
-.eslintcache# OS
-.DS_Store
-Thumbs.db
-.replit
+.eslintcache
+.cache/
 
 # Build artifacts
 server/public/
 vite.config.ts.*
 *.tar.gz
-
-# Misc
-.local/
-.config/
-.cache/

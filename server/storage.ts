@@ -28,10 +28,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    // MySQL doesn't support .returning() — insert then fetch by insertId
-    const result = await db.insert(users).values(insertUser);
-    const insertId = (result as any)[0].insertId;
-    const [user] = await db.select().from(users).where(eq(users.id, insertId));
+    // MySQL doesn't support .returning() — insert then fetch by PRN
+    await db.insert(users).values(insertUser);
+    const [user] = await db.select().from(users).where(eq(users.prn, insertUser.prn));
     return user;
   }
 
@@ -45,16 +44,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createEvent(event: typeof events.$inferInsert): Promise<Event> {
-    const result = await db.insert(events).values(event);
-    const insertId = (result as any)[0].insertId;
-    const [newEvent] = await db.select().from(events).where(eq(events.id, insertId));
+    await db.insert(events).values(event);
+    // Query back the event by name and date to get the full record
+    const [newEvent] = await db.select().from(events).where(
+      eq(events.name, event.name)
+    );
     return newEvent;
   }
 
   async createRegistration(registration: typeof registrations.$inferInsert): Promise<Registration> {
-    const result = await db.insert(registrations).values(registration);
-    const insertId = (result as any)[0].insertId;
-    const [reg] = await db.select().from(registrations).where(eq(registrations.id, insertId));
+    await db.insert(registrations).values(registration);
+    // Query back the registration by ticket code
+    const [reg] = await db.select().from(registrations).where(
+      eq(registrations.ticketCode, registration.ticketCode)
+    );
     return reg;
   }
 

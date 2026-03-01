@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Award, Star, Crown } from "lucide-react";
+import titleSponsorLogo from "@/../../client/assets/titlesponsor.png";
+import sponsor1Logo from "@/../../client/assets/sponsor1.jpeg";
+import sponsor2Logo from "@/../../client/assets/sponsor2.jpeg";
+import sponsor3Logo from "@/../../client/assets/sponsor3.jpeg";
 
 export default function Sponsors() {
   const containerVariants = {
@@ -18,20 +22,15 @@ export default function Sponsors() {
     show: { opacity: 1, y: 0 }
   };
 
-  // Placeholder sponsors - update with actual sponsor details
+  // Sponsor details with actual logos
   const titleSponsors = [
-    { name: "Title Sponsor 1", tier: "Platinum", logo: null },
+    { name: "Title Sponsor", tier: "Platinum", logo: titleSponsorLogo },
   ];
 
-  const goldSponsors = [
-    { name: "Gold Sponsor 1", tier: "Gold", logo: null },
-    { name: "Gold Sponsor 2", tier: "Gold", logo: null },
-  ];
-
-  const silverSponsors = [
-    { name: "Silver Sponsor 1", tier: "Silver", logo: null },
-    { name: "Silver Sponsor 2", tier: "Silver", logo: null },
-    { name: "Silver Sponsor 3", tier: "Silver", logo: null },
+  const sponsors = [
+    { name: "Sponsor 1", tier: "Partner", logo: sponsor1Logo },
+    { name: "Sponsor 2", tier: "Partner", logo: sponsor2Logo },
+    { name: "Sponsor 3", tier: "Partner", logo: sponsor3Logo },
   ];
 
   return (
@@ -74,7 +73,7 @@ export default function Sponsors() {
             {titleSponsors.map((sponsor, idx) => (
               <motion.div key={idx} variants={itemVariants}>
                 <Card className="p-12 bg-gradient-to-br from-primary/20 via-[#0e0c0a]/80 to-[#0e0c0a]/60 border-primary/30 rounded-none hover:border-primary/50 transition-all duration-500 text-center group">
-                  <div className="flex flex-col items-center gap-6">
+                  <div className="flex items-center justify-center">
                     {sponsor.logo ? (
                       <img src={sponsor.logo} alt={sponsor.name} className="h-32 object-contain" />
                     ) : (
@@ -82,11 +81,6 @@ export default function Sponsors() {
                         <span className="text-xs text-[#a89984]/50 uppercase tracking-wider">Logo Coming Soon</span>
                       </div>
                     )}
-                    <h3 className="text-2xl font-bold font-display text-[#d4c5a9] tracking-widest uppercase">{sponsor.name}</h3>
-                    <div className="flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-primary" />
-                      <span className="text-sm text-primary font-mono uppercase tracking-wider">{sponsor.tier} Partner</span>
-                    </div>
                   </div>
                 </Card>
               </motion.div>
@@ -94,20 +88,20 @@ export default function Sponsors() {
           </div>
         </section>
 
-        {/* Gold Sponsors */}
+        {/* Sponsors */}
         <section>
           <motion.div variants={itemVariants} className="flex flex-col items-center gap-4 mb-8 md:mb-16 text-center">
             <Award className="w-8 h-8 text-primary opacity-60" />
             <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-[#d4c5a9] tracking-[0.15em] md:tracking-[0.3em] uppercase">
-              Gold Sponsors
+              Sponsors
             </h2>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {goldSponsors.map((sponsor, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+            {sponsors.map((sponsor, idx) => (
               <motion.div key={idx} variants={itemVariants}>
                 <Card className="p-8 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all duration-500 h-full text-center group">
-                  <div className="flex flex-col items-center gap-4">
+                  <div className="flex items-center justify-center h-full">
                     {sponsor.logo ? (
                       <img src={sponsor.logo} alt={sponsor.name} className="h-24 object-contain" />
                     ) : (
@@ -115,44 +109,6 @@ export default function Sponsors() {
                         <span className="text-xs text-[#a89984]/50 uppercase tracking-wider">Logo Coming Soon</span>
                       </div>
                     )}
-                    <h3 className="text-lg font-bold font-display text-[#d4c5a9] tracking-widest uppercase">{sponsor.name}</h3>
-                    <div className="flex items-center gap-2">
-                      <Award className="w-4 h-4 text-primary" />
-                      <span className="text-xs text-primary/80 font-mono uppercase tracking-wider">{sponsor.tier} Partner</span>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Silver Sponsors */}
-        <section>
-          <motion.div variants={itemVariants} className="flex flex-col items-center gap-4 mb-8 md:mb-16 text-center">
-            <Star className="w-8 h-8 text-primary opacity-60" />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-[#d4c5a9] tracking-[0.15em] md:tracking-[0.3em] uppercase">
-              Silver Sponsors
-            </h2>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {silverSponsors.map((sponsor, idx) => (
-              <motion.div key={idx} variants={itemVariants}>
-                <Card className="p-6 bg-[#0e0c0a]/60 border-primary/10 rounded-none hover:border-primary/30 transition-all duration-500 h-full text-center group">
-                  <div className="flex flex-col items-center gap-3">
-                    {sponsor.logo ? (
-                      <img src={sponsor.logo} alt={sponsor.name} className="h-20 object-contain" />
-                    ) : (
-                      <div className="h-20 w-full flex items-center justify-center border-2 border-dashed border-primary/20 rounded">
-                        <span className="text-[10px] text-[#a89984]/50 uppercase tracking-wider">Logo Soon</span>
-                      </div>
-                    )}
-                    <h3 className="text-base font-bold font-display text-[#d4c5a9] tracking-widest uppercase">{sponsor.name}</h3>
-                    <div className="flex items-center gap-2">
-                      <Star className="w-3.5 h-3.5 text-primary/70" />
-                      <span className="text-[10px] text-primary/70 font-mono uppercase tracking-wider">{sponsor.tier}</span>
-                    </div>
                   </div>
                 </Card>
               </motion.div>

@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles for Home and Events pages */
+.custom-home-div {
+  /* Add any styles previously inline here */
+}
+.custom-events-scroll {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Sherlock Holmes Victorian Mystery Theme */
   --font-display: 'Cinzel', serif;
